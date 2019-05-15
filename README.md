@@ -80,16 +80,23 @@ This repository is a collaborative effort, so please feel free to make a pull re
 - [Custom Type Errors](guides/Custom-Type-Errors.md)
 - [Nodeを使わないPureScript](guides/PureScript-Without-Node.md)
 - [準標準ライブラリ(Contrib Library)のガイドライン](guides/Contrib-Guidelines.md)
-- [エラー・警告を指摘するツール集](guides/Error-Suggestions.md)
+- [エラー・警告を指摘するツール](guides/Error-Suggestions.md)
 - [psc-ideについてのよくある質問集](guides/psc-ide-FAQ.md)
 - [Try PureScriptについて](https://github.com/purescript/trypurescript/blob/gh-pages/README.md)
 
-
+<!--
 ### Tools
+-->
+### ツール
 
+<!--
 - [Editor and tool support](ecosystem/Editor-and-tool-support.md): Editor plugins, build tools, and other development tools
 - [PureScript and NixOS](https://pr06lefs.wordpress.com/2015/01/11/get-started-with-purescript-on-nixos/): How to use PureScript with NixOS
 - [PSCi](guides/PSCi.md): An interactive development tool for PureScript
+-->
+- [エディタとツール](ecosystem/Editor-and-tool-support.md): エディタプラグインとビルドツール、その他開発ツールについてのリンク集です。
+- [PureScript and NixOS](https://pr06lefs.wordpress.com/2015/01/11/get-started-with-purescript-on-nixos/): NixOS上でPureScriptを使う方法の解説です。
+- [PSCi](guides/PSCi.md): PureScriptの対話式開発ツールについての解説です。
 
 ### Ecosystem
 
