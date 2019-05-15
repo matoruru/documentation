@@ -79,7 +79,7 @@ This repository is a collaborative effort, so please feel free to make a pull re
 - [外部関数インタフェース Tips集](guides/FFI-Tips.md)
 - [Custom Type Errors](guides/Custom-Type-Errors.md)
 - [Nodeを使わないPureScript](guides/PureScript-Without-Node.md)
-- [準標準ライブラリ(Contrib Library)のガイドライン集](guides/Contrib-Guidelines.md)
+- [準標準ライブラリ(Contrib Library)のガイドライン](guides/Contrib-Guidelines.md)
 - [エラー・警告を指摘するツール集](guides/Error-Suggestions.md)
 - [psc-ideについてのよくある質問集](guides/psc-ide-FAQ.md)
 - [Try PureScriptについて](https://github.com/purescript/trypurescript/blob/gh-pages/README.md)
