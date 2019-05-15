@@ -98,40 +98,86 @@ This repository is a collaborative effort, so please feel free to make a pull re
 - [PureScript and NixOS](https://pr06lefs.wordpress.com/2015/01/11/get-started-with-purescript-on-nixos/): NixOS上でPureScriptを使う方法の解説です。
 - [PSCi](guides/PSCi.md): PureScriptの対話式開発ツールについての解説です。
 
+<!--
 ### Ecosystem
+-->
+### エコシステム
 
+<!--
 - [Maintained Packages](ecosystem/Maintained-Packages.md)
 - [Style Guide](guides/Style-Guide.md)
 - [Alternate Backends](https://github.com/purescript/documentation/blob/master/ecosystem/Alternate-backends.md): PureScript can compile to other languages as well!
+-->
+- [メンテナンスされたパッケージ](ecosystem/Maintained-Packages.md)
+- [スタイルガイド](guides/Style-Guide.md)
+- [別のコンパイルターゲット](https://github.com/purescript/documentation/blob/master/ecosystem/Alternate-backends.md): PureScriptを別の言語にコンパイルすることが可能です!
 
+<!--
 ### Articles
+-->
+### 記事集
 
 - [24 Days of PureScript 2016](https://github.com/paf31/24-days-of-purescript-2016)
 
+<!--
 ### Talks/Meetups
+-->
+### トーク・会合
 
 - [PureScript Presentations](ecosystem/PureScript-Presentations.md)
 - [PureScript Meetups](ecosystem/PureScript-Meetups.md)
 
+<!--
 ### Related Languages
+-->
+### 関連のある言語
 
+<!--
 - [Related Projects](Related-Projects.md)
 - [Differences from Haskell](language/Differences-from-Haskell.md)
+-->
+- [関連するプロジェクト](Related-Projects.md)
+- [Haskellとの違い](language/Differences-from-Haskell.md)
 
+
+<!--
 ## Project Scope
+-->
+## プロジェクトの範囲
 
+<!--
 Topics currently in this repository's scope:
+-->
+現在、このプロジェクトは以下のトピックを扱っています：
 
+<!--
 - PureScript language reference documentation
 - Its compiler errors
 - Core concepts on which the language is based
 - Comparison with similar languages
 - An introduction to other sources of documentation
+-->
+- PureScriptの言語リファレンス・ドキュメント
+- コンパイラのエラー
+- PureScriptの基盤となるコアコンセプト
+- 似た言語との比較
+- 別の提供元にあるドキュメントの紹介
 
+<!--
 Topics currently *not* in scope:
+-->
+現在、このプロジェクトは以下のトピックを**扱っていません**:
 
+<!--
 - Using PureScript libraries (those docs belong with the corresponding libraries)
 - A PureScript language teaching course (use the [PureScript by Example](https://leanpub.com/purescript/read) book or other resources)
 - Introduction to package managers and dependency management
+-->
+- PureScriptライブラリの使用 (これらは各ライブラリに付属しています)
+- PureScriptの学習コース ([PureScript by Example](https://leanpub.com/purescript/read)やその他の記事を参照してください)
+- パッケージマネージャと依存関係の管理についての紹介
 
+<!--
 Feel free to make an issue to discuss amending the scope.
+-->
+どうぞ気軽に、issueを立てたり、プロジェクト範囲の見直しについて話し合ってください。
