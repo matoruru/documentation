@@ -1,9 +1,12 @@
 ![PureScript](https://github.com/purescript/purescript/raw/master/logo.png)
 
-Welcome to the PureScript documentation repository!
+<!--Welcome to the PureScript documentation repository!-->
+PureScriptのドキュメントリポジトリへようこそ！
 
-PureScript is a small, strongly typed programming language that compiles to JavaScript.
-To get a better overview of PureScript, visit [The PureScript Website](http://purescript.org).
+<!--PureScript is a small, strongly typed programming language that compiles to JavaScript.
+To get a better overview of PureScript, visit [The PureScript Website](http://purescript.org).-->
+PureScriptは、小さくて、JavaScriptへコンパイルされる強い型付け言語です。
+PureScriptの概要をもっと見たいなら、[The PureScript Website](http://purescript.org)にアクセスしてください。
 
 This repository is a collaborative effort, so please feel free to make a pull request to add/edit content or create an issue to discuss it. PureScript is a big project used by people coming from a variety of backgrounds. Making documentation useful to a wide variety of people is really hard to do well, requiring readers like you to point out and add documentation you feel is missing. Thanks for helping!
 
