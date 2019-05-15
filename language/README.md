@@ -54,8 +54,21 @@ Line by line, this reads as follows:
 - `showPerson`関数は、引数の解析によって実現される。まずは`Person`コンストラクタにマッチし、その後にオブジェクトのアクセサと文字列結合の結果を返す。
 - `examplePerson`はPersonオブジェクトであり、`Person`コンストラクタに、nameの値としての文字列"Bonnie"とageの値としての整数26を与えることで作成される。
 
+<!--
+The full language reference continues below:
+-->
 言語リファレンスの全容は以下に続きます:
 
+<!--
+1. [Types](Types.md)
+2. [Syntax](Syntax.md)
+3. [Type Classes](Type-Classes.md)
+4. [Pattern Matching](Pattern-Matching.md)
+5. [Modules](Modules.md)
+6. [FFI](FFI.md)
+7. [Records](Records.md)
+8. [Differences from Haskell](Differences-from-Haskell.md)
+-->
 1. [型](Types.md)
 2. [構文](Syntax.md)
 3. [型クラス](Type-Classes.md)
