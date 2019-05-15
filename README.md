@@ -58,8 +58,22 @@ This repository is a collaborative effort, so please feel free to make a pull re
 - [PureScript: Jordan's Reference](https://github.com/JordanMartinez/purescript-jordans-reference): 入門、ビルドツール、PureScriptの構文の例、関数型プログラミングのデザインパターン、PureScriptのエコシステムなどをカバーする最新のプロジェクト集です。
 - [A guide to the PureScript numeric hierarchy](https://a-guide-to-the-purescript-numeric-hierarchy.readthedocs.io/en/latest/index.html): PureScriptのPreludeに含まれる型クラスの数値の階層に隠れた数学についての解説です。[PureScript numeric hierarchy overview](https://harry.garrood.me/numeric-hierarchy-overview/)も参照してください。
 
+<!--
+### Guides
+-->
 ### ガイド集
 
+<!--
+- [Common Operators](guides/Common-Operators.md)
+- [The Foreign Function Interface (FFI)](guides/FFI.md)
+- [FFI Tips](guides/FFI-Tips.md)
+- [Custom Type Errors](guides/Custom-Type-Errors.md)
+- [PureScript Without Node](guides/PureScript-Without-Node.md)
+- [Contrib Library Guidelines](guides/Contrib-Guidelines.md)
+- [Error Suggestions](guides/Error-Suggestions.md)
+- [psc-ide FAQ](guides/psc-ide-FAQ.md)
+- [Try PureScript Help](https://github.com/purescript/trypurescript/blob/gh-pages/README.md)
+-->
 - [演算子](guides/Common-Operators.md)
 - [外部関数インタフェース(FFI)](guides/FFI.md)
 - [外部関数インタフェース Tips集](guides/FFI-Tips.md)
