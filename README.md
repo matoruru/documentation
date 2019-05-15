@@ -1,25 +1,47 @@
 ![PureScript](https://github.com/purescript/purescript/raw/master/logo.png)
 
-<!--Welcome to the PureScript documentation repository!-->
+<!--
+Welcome to the PureScript documentation repository!
+-->
 PureScriptのドキュメントリポジトリへようこそ！
 
-<!--PureScript is a small, strongly typed programming language that compiles to JavaScript.
-To get a better overview of PureScript, visit [The PureScript Website](http://purescript.org).-->
+<!--
+PureScript is a small, strongly typed programming language that compiles to JavaScript.
+To get a better overview of PureScript, visit [The PureScript Website](http://purescript.org).
+-->
 PureScriptは、小さくて、JavaScriptへコンパイルされる強い型付け言語です。
 PureScriptの概要をもっと見たいなら、[The PureScript Website](http://purescript.org)にアクセスしてください。
 
+<!--
 This repository is a collaborative effort, so please feel free to make a pull request to add/edit content or create an issue to discuss it. PureScript is a big project used by people coming from a variety of backgrounds. Making documentation useful to a wide variety of people is really hard to do well, requiring readers like you to point out and add documentation you feel is missing. Thanks for helping!
+-->
+このリポジトリはみんなの努力の結晶ですから、編集や追加、プルリクエストをしたり、議論を重ねることを厭わず、気軽に行ってください。PureScriptは様々なバックグラウンドを持つ人々に利用される巨大なプロジェクトです。多様な人々にとって便利なドキュメントを作ることは本当に難しいため、内容の不足を指摘してくれるあなたのような読者を必要としています。よろしくお願いします！
 
+<!--
 ## Directory
+-->
+## リンク集
 
+<!--
 ### Getting Started
+-->
+### 入門
 
+<!--
 - [Getting Started](guides/Getting-Started.md): Download PureScript and build your first project
 - [PureScript By Example](https://leanpub.com/purescript/read): A book about PureScript. Learn functional programming for the web by solving practical problems
 - [Try PureScript](http://try.purescript.org): Try PureScript in your browser
+-->
+- [Getting Started](guides/Getting-Started.md): PureScriptのダウンロードから初めてのプロジェクトをビルドする方法までを解説しています。
+- [PureScript By Example](https://leanpub.com/purescript/read): PureScriptについての本です。実用的な問題解決法をWebに役立てる関数型プログラミングの手法を学びます。
+- [Try PureScript](http://try.purescript.org): PureScriptをWebブラウザから試すことができます。
 
+<!--
 ### Learning
+-->
+### 学習
 
+<!--
 - The [PureScript Book](https://leanpub.com/purescript/read) is the recommended approach to learning the language, since it covers more material in greater depth. However, it covers `0.11.7` and is not updated yet for the `0.12.x` version of the compiler. Thus, one should be aware of the following materials when reading through the book:
     - See [dwhitney's fork of the book's exercises](https://github.com/dwhitney/purescript-book) which is updated for `0.12.x`.
     - See [Justin's `0.11.7` to `0.12.x` summary](https://purescript-resources.readthedocs.io/en/latest/0.11.7-to-0.12.0.html) to know how to 'translate' the outdated book's code into working code.
@@ -27,18 +49,26 @@ This repository is a collaborative effort, so please feel free to make a pull re
 - [Language Reference](language/README.md)
 - [PureScript: Jordan's Reference](https://github.com/JordanMartinez/purescript-jordans-reference): An up-to-date project covering Getting Started, Build Tools, PureScript's syntax with examples, FP design patterns, and PureScript's ecosystem.
 - [A guide to the PureScript numeric hierarchy](https://a-guide-to-the-purescript-numeric-hierarchy.readthedocs.io/en/latest/index.html): An introduction to the mathematics behind the numeric hierarchy of type classes in PureScript’s Prelude. (See also [PureScript numeric hierarchy overview](https://harry.garrood.me/numeric-hierarchy-overview/).)
+-->
+- [PureScript Book](https://leanpub.com/purescript/read) は、PureScriptに関するより多くのことを深く学習するためにおすすめの手段ですが、対応するコンパイラのバージョンが`0.11.7`のままで、`0.12.x`には未対応です。そのため、以下の記事を読んでいると気付くことがあるでしょう。
+    - [dwhitney's fork of the book's exercises](https://github.com/dwhitney/purescript-book) `0.12.x`に対応しています。
+    - [Justin's `0.11.7` to `0.12.x` summary](https://purescript-resources.readthedocs.io/en/latest/0.11.7-to-0.12.0.html) 古くなった本に含まれるソースコードを正しく動くように「翻訳」する方法を知ることができます。
+    - [deprecated packages](https://github.com/purescript-deprecated) ここに含まれる内容には常に注意を払ってください（廃止予定のモジュール集）。
+- [Language Reference](language/README.md)
+- [PureScript: Jordan's Reference](https://github.com/JordanMartinez/purescript-jordans-reference): 入門、ビルドツール、PureScriptの構文の例、関数型プログラミングのデザインパターン、PureScriptのエコシステムなどをカバーする最新のプロジェクト集です。
+- [A guide to the PureScript numeric hierarchy](https://a-guide-to-the-purescript-numeric-hierarchy.readthedocs.io/en/latest/index.html): PureScriptのPreludeに含まれる型クラスの数値の階層に隠れた数学についての解説です。[PureScript numeric hierarchy overview](https://harry.garrood.me/numeric-hierarchy-overview/)も参照してください。
 
-### Guides
+### ガイド集
 
-- [Common Operators](guides/Common-Operators.md)
-- [The Foreign Function Interface (FFI)](guides/FFI.md)
-- [FFI Tips](guides/FFI-Tips.md)
+- [演算子](guides/Common-Operators.md)
+- [外部関数インタフェース(FFI)](guides/FFI.md)
+- [外部関数インタフェース Tips集](guides/FFI-Tips.md)
 - [Custom Type Errors](guides/Custom-Type-Errors.md)
-- [PureScript Without Node](guides/PureScript-Without-Node.md)
-- [Contrib Library Guidelines](guides/Contrib-Guidelines.md)
-- [Error Suggestions](guides/Error-Suggestions.md)
-- [psc-ide FAQ](guides/psc-ide-FAQ.md)
-- [Try PureScript Help](https://github.com/purescript/trypurescript/blob/gh-pages/README.md)
+- [Nodeを使わないPureScript](guides/PureScript-Without-Node.md)
+- [準標準ライブラリ(Contrib Library)のガイドライン集](guides/Contrib-Guidelines.md)
+- [エラー・警告を指摘するツール集](guides/Error-Suggestions.md)
+- [psc-ideについてのよくある質問集](guides/psc-ide-FAQ.md)
+- [Try PureScriptについて](https://github.com/purescript/trypurescript/blob/gh-pages/README.md)
 
 
 ### Tools
