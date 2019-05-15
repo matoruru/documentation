@@ -50,7 +50,7 @@ This repository is a collaborative effort, so please feel free to make a pull re
 - [PureScript: Jordan's Reference](https://github.com/JordanMartinez/purescript-jordans-reference): An up-to-date project covering Getting Started, Build Tools, PureScript's syntax with examples, FP design patterns, and PureScript's ecosystem.
 - [A guide to the PureScript numeric hierarchy](https://a-guide-to-the-purescript-numeric-hierarchy.readthedocs.io/en/latest/index.html): An introduction to the mathematics behind the numeric hierarchy of type classes in PureScript’s Prelude. (See also [PureScript numeric hierarchy overview](https://harry.garrood.me/numeric-hierarchy-overview/).)
 -->
-- [PureScript Book](https://leanpub.com/purescript/read) は、PureScriptに関するより多くのことを深く学習するためにおすすめの手段ですが、対応するコンパイラのバージョンが`0.11.7`のままで、`0.12.x`には未対応です。そのため、以下の記事を読んでいると気付くことがあるでしょう。
+- [PureScript Book](https://leanpub.com/purescript/read) は、PureScriptに関するより多くのことを深く学習するためにおすすめの手段ですが、対応するコンパイラのバージョンが`0.11.7`のままで、`0.12.x`には未対応です。そのため、以下の記事の内容も合わせて知っておくべきです。
     - [dwhitney's fork of the book's exercises](https://github.com/dwhitney/purescript-book) `0.12.x`に対応しています。
     - [Justin's `0.11.7` to `0.12.x` summary](https://purescript-resources.readthedocs.io/en/latest/0.11.7-to-0.12.0.html) 古くなった本に含まれるソースコードを正しく動くように「翻訳」する方法を知ることができます。
     - [deprecated packages](https://github.com/purescript-deprecated) ここに含まれる内容には常に注意を払ってください（廃止予定のモジュール集）。
