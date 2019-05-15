@@ -1,7 +1,14 @@
+<!--
 # Types
+-->
+# 型
 
+<!--
 The type system defines the following types:
+-->
+型システムは以下の型を定義します：
 
+<!--
 - Primitive Types: `Int`, `Number`, `String`, `Char`, `Boolean`
 - Arrays
 - Records
@@ -12,6 +19,17 @@ The type system defines the following types:
 - Constrained Types
 - Type Synonyms
 - Rows
+-->
+- 原始型: `Int`, `Number`, `String`, `Char`, `Boolean`
+- 配列
+- レコード
+- タグ付き共用体
+- ユーザ定義型
+- 関数
+- 多相型
+- 制約のある型
+- 型同義語(型シノニム)
+- 列
 
 ## Primitive Types
 
