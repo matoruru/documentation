@@ -186,39 +186,67 @@ identity :: forall a. a -> a
 identity x = x
 ```
 
+<!--
 ## Row Polymorphism
+-->
+## 列多相
 
+<!--
 Polymorphism is not limited to abstracting over types. Values may also be polymorphic in types with other kinds, such as rows or effects (see "[Kind System](#kind-system)").
+-->
+多相性は型の抽象化に制限がなく、値は種に関して多相になるかもしれません。例えば、列やモナドなどです（[Kind System](#kind-system)を参照してください。）。
 
+
+<!--
 For example, the following function accesses two properties on a record:
+-->
+例えば、以下の関数はレコードの2パラメータにアクセスします。
 
 ```purescript
 addProps o = o.foo + o.bar + 1
 ```
 
+<!--
 The inferred type of ``addProps`` is:
+-->
+``addProps``から推論された型は：
 
 ```purescript
 forall r. { foo :: Int, bar :: Int | r } -> Int
 ```
 
+<!--
 Here, the type variable ``r`` has kind ``# Type`` - it represents a row of types. It can be instantiated with any row of named types.
+-->
+ここで、型変数``r``は種``# Type``を持ちます。この種は型の列を表現しています。これはどんな型の指定でもインスタンス化することができます。
 
+<!--
 In other words, ``addProps`` accepts any record which has properties ``foo`` and ``bar``, and *any other record properties*.
+-->
+別の言い方をすると、``addProps``は``foo``と``bar``という2つのプロパティに加え、どんなプロパティを持つレコードでもいいということです。
 
+<!--
 Therefore, the following application compiles:
+-->
+したがって、以下のアプリケーションがコンパイルできます：
 
 ```purescript
 addProps { foo: 1, bar: 2, baz: 3 }
 ```
 
+<!--
 even though the type of ``addProps`` does not mention the property ``baz``. However, the following does not compile:
+-->
+``addProps``はプロパティ``baz``について言及していないにも関わらず、です。しかし、以下のようにするとコンパイルできません：
 
 ```purescript
 addProps { foo: 1 }
 ```
 
+<!--
 since the ``bar`` property is missing.
+-->
+プロパティ``bar``が欠落しているからです。
 
 ## Rank N Types
 
