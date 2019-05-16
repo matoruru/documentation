@@ -79,7 +79,7 @@ PureScriptのレコードはJavaScriptのオブジェクトに対応していま
 <!--
 Tagged unions consist of one or more constructors, each of which takes zero or more arguments.
 -->
-タグ付き共用体は1つ以上のコンストラクタ（0個以上の引数を取る）から構成されます。
+タグ付き共用体は1つ以上のコンストラクタから構成されます。各コンストラクタは0個以上の引数を取ります。
 
 <!--
 Tagged unions can only be created using their constructors, and deconstructed through pattern matching (a more thorough treatment of pattern matching will be provided later).
@@ -111,42 +111,75 @@ In the example, Foo is a tagged union type which has two constructors. Its first
 <!--
 `runFoo` is an example of pattern matching on a tagged union type to discover its constructor, and the last two lines show how to construct values of type `Foo`.
 -->
-`runFoo`はタグ付き共用体のコンストラクタを発見する例になっています。最後の2行で`Foo`型の値を作成しています。
+`runFoo`はタグ付き共用体のコンストラクタを発見する例になっています。また、最後の2行で`Foo`型の値を作成しています。
 
+<!--
 ## Newtypes
+-->
+## ユーザ定義型
 
+<!--
 Newtypes are like data types (which are introduced with the `data` keyword), but are restricted to a single constructor which contains a single argument. Newtypes are introduced with the `newtype` keyword:
+-->
+ユーザ定義型は`data`キーワードによって表現されるデータ型と似ていますが、1つの引数を取るコンストラクタを1つ持つように制限されています。ユーザ定義型は`newtype`キーワードによって表現されます。
 
 ```purescript
 newtype Percentage = Percentage Number
 ```
 
+<!--
 The representation of a newtype at runtime is the same as the underlying data type. For example, a value of type `Percentage` is just a JavaScript number at runtime.
+-->
+ユーザ定義型は、ランタイムではその基となったデータ型と同じです。例えば、`Percentage`型の値は、ランタイムではただのJavaScriptの数値です。
 
+<!--
 Newtypes are considered different from their underlying types by the type checker. For example, if you try to apply a function to a `Percentage` where it expects a `Number`, the type checker will reject your program.
+-->
+ユーザ定義型は、型検査によって、その基となった型とは異なるものとして扱われます。例えば、`Number`型を受け取る関数に`Percentage`型を渡すことは、型検査によって拒絶されます。
 
+<!--
 Newtypes can be assigned their own type class instances, so for example, `Percentage` can be given its own `Show` instance:
+-->
+ユーザ定義型には、自身にクラスのインスタンスを割り当てることができます。例えば、`Percentage`は`Show`インスタンスを持つことができます：
 
 ```purescript
 instance showPercentage :: Show Percentage where
   show (Percentage n) = show n <> "%"
 ```
 
+<!--
 ## Functions
+-->
+## 関数
 
+<!--
 Functions in PureScript are like their JavaScript counterparts, but always have exactly one argument.
+-->
+PureScriptの関数はJavaScriptのそれとほぼ対応しますが、確実に1つの引数を持つようになっています。
 
+<!--
 ## Polymorphic Types
+-->
+## 多相型
 
+<!--
 Expressions can have polymorphic types:
+-->
+式は多相型を持つことができます：
 
 ```purescript
 identity x = x
 ```
 
+<!--
 ``identity`` is inferred to have (polymorphic) type ``forall t0. t0 -> t0``. This means that for any type ``t0``, ``identity`` can be given a value of type ``t0`` and will give back a value of the same type.
+-->
+``identity``は多相型の``forall t0. t0 -> t0``を持つ、と推論されます。これは、``identity``が何の型にでもなれる``t0``型の値を受け取り、同じ型の値を返すことを意味します。
 
+<!--
 A type annotation can also be provided:
+-->
+以下のように型注釈をつけることもできます：
 
 ```purescript
 identity :: forall a. a -> a
