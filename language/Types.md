@@ -31,29 +31,65 @@ The type system defines the following types:
 - 型同義語(型シノニム)
 - 列
 
+<!--
 ## Primitive Types
+-->
+## 原始型
 
+<!--
 The primitive types `String`, `Number` and `Boolean` correspond to their JavaScript equivalents at runtime.
+-->
+`String`、`Number`、`Boolean`の各原始型は、JavaScriptのそれと対応しています。
 
+<!--
 ## Integers
+-->
+## 整数型
 
+<!--
 The `Int` type represents integer values. The runtime representation is also a normal JavaScript number; however, operations like `(+)` on `Int` values are defined differently in order to ensure that you always get `Int` values as a result.
+-->
+`Int`型は整数値を表現します。ランタイムではJavaScriptの普通の数字と同じですが、`Int`値を受け取る演算子`(+)`などは、常に`Int`値を返すように、異なる定義になっています。
 
+<!--
 ## Arrays
+-->
+## 配列
 
+<!--
 PureScript arrays correspond to Javascript arrays at runtime, but all elements in an array must have the same type. The `Array` type takes one type argument to specify what type this is. For example, an array of integers would have the type `Array Int`, and an array of strings would have the type `Array String`.
+-->
+PureScriptの配列はランタイムでJavaScriptの配列と対応していますが、全要素が同じ型でなければなりません。`Array`型は、引数を1つ取ることで、自分自身の型が何であるかを特定します。例えば、整数の配列は型`Array Int`を持ち、文字列の配列は型`Array String`を持ちます。
 
+<!--
 ## Records
+-->
+## レコード
 
+<!--
 PureScript records correspond to JavaScript objects. They may have zero or more named fields, each with their own types. For example: `{ name :: String, greet :: String -> String }` corresponds to a JavaScript object with precisely two fields: `name`, which is a `String`, and `greet`, which is a function that takes a `String` and returns a `String`.
+-->
+PureScriptのレコードはJavaScriptのオブジェクトに対応しています。これは0個以上の名前付きフィールドを持ち、各フィールドが型を持っています。例えば：`{ name :: String, greet :: String -> String }`はJavaScriptオブジェクトの、`String`型の`name`と、`String`型を取り`String`型を返す関数`greet`の2フィールドに正確に対応します。
 
+<!--
 ## Tagged Unions
+-->
+## タグ付き共用体
 
+<!--
 Tagged unions consist of one or more constructors, each of which takes zero or more arguments.
+-->
+タグ付き共用体は1つ以上のコンストラクタ（0個以上の引数を取る）から構成されます。
 
+<!--
 Tagged unions can only be created using their constructors, and deconstructed through pattern matching (a more thorough treatment of pattern matching will be provided later).
+-->
+タグ付き共用体はコンストラクタからのみ作成され、パターンマッチによって解体されます（さらに徹底的なパターンマッチの方法については後に提示します）。
 
+<!--
 For example:
+-->
+例をお見せします：
 
 ```purescript
 data Foo = Foo | Bar String
@@ -67,9 +103,15 @@ main = do
   log (runFoo (Bar "Test"))
 ```
 
+<!--
 In the example, Foo is a tagged union type which has two constructors. Its first constructor `Foo` takes no arguments, and its second `Bar` takes one, which must be a String.
+-->
+上記の例で、Fooは2つのコンストラクタを持つタグ付き共用体です。1つ目のコンストラクタ`Foo`は引数を取らず、2つ目のコンストラクタ`Bar`はString型の引数を1つ取ります。
 
+<!--
 `runFoo` is an example of pattern matching on a tagged union type to discover its constructor, and the last two lines show how to construct values of type `Foo`.
+-->
+`runFoo`はタグ付き共用体のコンストラクタを発見する例になっています。最後の2行で`Foo`型の値を作成しています。
 
 ## Newtypes
 
