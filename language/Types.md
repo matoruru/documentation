@@ -248,42 +248,78 @@ since the ``bar`` property is missing.
 -->
 プロパティ``bar``が欠落しているからです。
 
+<!--
 ## Rank N Types
+-->
+## 高階多相型
 
+<!--
 It is also possible for the ``forall`` quantifier to appear on the left of a function arrow, inside types record fields and data constructors, and in type synonyms.
+-->
+``forall``量化子を関数アローの左側や、レコード型のフィールド、データコンストラクタ、型同義語に書くことも可能です。
 
+<!--
 In most cases, a type annotation is necessary when using this feature.
+-->
+ほとんどの場合、この機能を使うときには型注釈が必要になります。
 
+<!--
 As an example, we can pass a polymorphic function as an argument to another function:
+-->
+私達が多相関数を他の関数の引数として渡すことができる例をお見せします：
 
 ```purescript
 poly :: (forall a. a -> a) -> Boolean
 poly f = (f 0 < 1) == f true
 ```
 
+<!--
 Notice that the polymorphic function's type argument is instantiated to both ``Number`` and ``Boolean``.
+-->
+多相関数の型引数が``Number``と``Boolean``の両方にインスタンス化されることに注意してください。
 
+<!--
 An argument to ``poly`` must indeed be polymorphic. For example, the following fails:
+-->
+``poly``の引数は多相でなければなりません。例えば、以下のようにすると失敗します：
 
 ```purescript
 test = poly (\n -> n + 1)
 ```
 
+<!--
 since the skolemized type variable ``a`` does not unify with ``Int``.
+-->
+スコーレム化された変数``a``は必ずしも``Int``になるわけではないからです。
 
+<!--
 ## Rows
+-->
+## 列
 
+<!--
 A row of types represents an unordered collection of named types, with duplicates. Duplicate labels have their types collected together in order, as if in a ``NonEmptyList``. This means that, conceptually, a row can be thought of as a type-level ``Map Label (NonEmptyList Type)``.
+-->
+型の列は、名前付きでの型から成る重複可能で順不同な集合です。重複するラベルは順番に型がまとめられ、``NonEmptyList``のようになります。これは概念的には、列は型レベルの``Map Label (NonEmptyList Type)``であると考えられるということです。
 
+<!--
 Rows are not of kind ``Type``: they have kind ``# k`` for some kind ``k``, and so rows cannot exist as a value. Rather, rows can be used in type signatures to define record types or other type where labelled, unordered types are useful.
+-->
+列は``Type``種ではなく、``k``種に対しての``# k``種を持つので、値として存在することはできません。むしろ、列はレコード型やラベル付けされた別の型を定義するために型シグネチャとして使用されます。非順序型は便利です。
 
+<!--
 To denote a closed row, separate the fields with commas, with each label separated from its type with a double colon:
+-->
+閉じた列を表現するためには、フィールドをカンマで区切ります。また、フィールドと型はコロン2つで区切ります：
 
 ```purescript
 ( name :: String, age :: Number )
 ```
 
+<!--
 To denote an open row (i.e. one which may unify with another row to add new fields), separate the specified terms from a row variable by a pipe:
+-->
+開いた列（新しいフィールドを追加するために他の行と統合する可能性がある）を表現するためには、特定の文字と行変数をパイプで区切ります：
 
 ```purescript
 ( name :: String, age :: Number | r )
