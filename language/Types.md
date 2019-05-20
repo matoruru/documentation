@@ -28,7 +28,7 @@ The type system defines the following types:
 - 関数
 - 多相型
 - 制約のある型
-- 型同義語(型シノニム)
+- 型シノニム(型同義語)
 - 列
 
 <!--
@@ -256,7 +256,7 @@ since the ``bar`` property is missing.
 <!--
 It is also possible for the ``forall`` quantifier to appear on the left of a function arrow, inside types record fields and data constructors, and in type synonyms.
 -->
-``forall``量化子を関数アローの左側や、レコード型のフィールド、データコンストラクタ、型同義語に書くことも可能です。
+``forall``量化子を関数アローの左側や、レコード型のフィールド、データコンストラクタ、型シノニムに書くことも可能です。
 
 <!--
 In most cases, a type annotation is necessary when using this feature.
@@ -325,11 +325,20 @@ To denote an open row (i.e. one which may unify with another row to add new fiel
 ( name :: String, age :: Number | r )
 ```
 
+<!--
 ## Type Synonyms
+-->
+## 型シノニム(型同義語)
 
+<!--
 For convenience, it is possible to declare a synonym for a type using the ``type`` keyword. Type synonyms can include type arguments but [cannot be partially applied](../errors/PartiallyAppliedSynonym.md#partiallyappliedsynonym-error). Type synonyms can be built with any other types but [cannot refer to each other in a cycle](../errors/CycleInTypeSynonym.md#cycleintypesynonym-error).
+-->
+利便性のため、``type``キーワードを用いて型の同義語を宣言することができます。型シノニムは型引数を取ることができますが、[部分適用は許されていません](../errors/PartiallyAppliedSynonym.md#partiallyappliedsynonym-error)。また、型シノニムは他の型の定義のためにも用いることができますが、[再帰は許されていません](../errors/CycleInTypeSynonym.md#cycleintypesynonym-error)。
 
+<!--
 For example:
+-->
+例えば：
 
 ```purescript
 -- Create an alias for a record with two fields
@@ -366,11 +375,20 @@ type RandomConsoleEffects eff = ( random :: RANDOM, console :: CONSOLE | eff )
 type RandomConsoleEffect = RandomConsoleEffects ()
 ```
 
+<!--
 Unlike newtypes, type synonyms are merely aliases and cannot be distinguished from usages of their expansion. Because of this they cannot be used to declare a type class instance. For more see [``TypeSynonymInstance`` Error](../errors/TypeSynonymInstance.md#typesynonyminstance-error).
+-->
+ユーザ定義型とは異なり、型シノニムは単に型の別名であり、基の型と区別されません。このため、型クラスのインスタンスを宣言するために使うことはできません。
 
+<!--
 ## Constrained Types
+-->
+## 制約のある型
 
+<!--
 Polymorphic types may be predicated on one or more ``constraints``. See the chapter on type classes for more information.
+-->
+多相型は1つ以上の``制約``の上に成り立っています。詳しくは型クラスの章を見てください。
 
 ## Type Annotations
 
