@@ -593,39 +593,60 @@ Non-associative parsing via `infix` is most appropriate for operators `f` for wh
 -->
 `infix`による非結合は``x `f` (y `f` z)``と``(x `f` y) `f` z)``が必ずしも同じではなく、結合性の代数的規則を満たさない演算子`f`に最も適しています。
 
+<!--
 ### Precedence
+-->
+### 優先順位
 
+<!--
 Precedence determines the order in which operators are bracketed. Operators with a higher precedence will be bracketed earlier. For example, take `*` and `+` from Prelude. `*` is precedence 7, whereas `+` is precedence 6. Therefore, if we write:
+-->
+優先順位は演算子が括弧で囲まれる順番を決定します。優先順位の高い演算子から括弧に囲まれます。例えば、 Preludeから`*`と`+`を考えると、`*`の優先順位が7である一方、`+`の優先順位は6です。したがって、このように書くと：
 
 ```
 2 * 3 + 4
 ```
 
+<!--
 then this is bracketed as follows:
+-->
+以下のように括弧で囲まれます：
 
 ```
 (2 * 3) + 4
 ```
 
+<!--
 Operators of different associativities may appear together as long as they do not have the same precedence. This restriction exists because the compiler is not able to make a sensible choice as to how to bracket such expressions. For example, the operators `==` and `<$>` from the Prelude have the fixities `infix 4` and `infixl 4` respectively, which means that given the expression
+-->
+異なる結合性を持つ演算子は、それらが同じ優先順位を持っていない限り同時に現れることがあります。この制限は、コンパイラがそのような式に対する括弧の付け方に関してそれほど賢い選択ができないために存在しています。例えば、Preludeの`==`と`<$>`の演算子はそれぞれ`infix 4`と`infixl 4`の固定式を持ちます。これは以下のような式が与えられた時：
 
 ```
 f <$> x == f <$> y
 ```
 
+<!--
 the compiler does not know whether to bracket it as
+-->
+コンパイラは以下のように括弧を付けるか：
 
 ```
 (f <$> x) == (f <$> y)
 ```
 
+<!--
 or
+-->
+または以下のように付けるか：
 
 ```
 f <$> (x == f) <$> y
 ```
 
+<!--
 Therefore, we get a [MixedAssociativityError](../errors/MixedAssociativityError):
+-->
+わからないということです。したがって、[MixedAssociativityError](../errors/MixedAssociativityError)が返されます：
 
 ```
 Cannot parse an expression that uses operators of the same precedence but mixed associativity:
@@ -636,41 +657,68 @@ Cannot parse an expression that uses operators of the same precedence but mixed 
 Use parentheses to resolve this ambiguity.
 ```
 
+<!--
 ### Operators as values
+-->
+### 値としての演算子
 
+<!--
 Operators can be used as normal values by surrounding them with parentheses:
+-->
+演算子は丸括弧で囲むことにより普通の値として使用することができます：
 
 ``` purescript
 and = (&&)
 ```
 
+<!--
 ### Operator sections
+-->
+### 演算子セクション
 
+<!--
 Operators can be partially applied by surrounding them with parentheses and using `_` as one of the operands:
+-->
+演算子は片方のオペランドとしての`_`と共に丸括弧で囲むことで、部分適用が可能です：
 
 ``` purescript
 half = (_ / 2)
 double = (2 * _)
 ```
 
+<!--
 ### Functions as operators
+-->
+### 演算子としての関数
 
+<!--
 Functions can be used as infix operators when they are surrounded by backticks:
+-->
+関数はバッククォートで囲むことにより中置演算子として使うことができます：
 
 ``` purescript
 foo x y = x * y + y
 test = 10 `foo` 20
 ```
 
+<!--
 Operator sections also work for functions used this way:
+-->
+演算子セクションの演算子としても使うことが可能です：
 
 ``` purescript
 fooBy2 = (_ `foo` 2)
 ```
 
+<!--
 ## Case expressions
+-->
+## case式
 
+<!--
 The `case` and `of` keywords are used to deconstruct values to create logic based on the value's constructors. You can match on multiple values by delimiting them with `,` in the head and cases.
+-->
+`case`と`of`のキーワードは、値のコンストラクタに基づいたロジックを作成するために値を分解するために使用します。ケース側に`,`で区切って記述することで、複数の値にマッチすることができます。
 
 ``` purescript
 f :: Maybe Boolean -> Either Boolean Boolean -> String
@@ -678,11 +726,15 @@ f a b = case a, b of
   Just true, Right true -> "Both true"
   Just true, Left _ -> "Just is true"
   Nothing, Right true -> "Right is true"
-  _, _ -> "Both are false"
+  _, _ -> "Both are falsと`of`のキーワードはe"
 f (Just true) (Right true)
 ```
 
+<!--
 Like top-level declarations, `case` expressions support guards.
+-->
+トップレベル宣言のように、`case`式ではガードを使用できます。
+
 ``` purescript
 f :: Either Int Unit -> String
 f x = case x of
@@ -692,7 +744,11 @@ f x = case x of
   Right _ -> "Right"
 ```
 
+<!--
 A binding can be avoided by using a single underscore in place of the expression to match on; in this context the underscore represents an _anonymous argument_.
+-->
+マッチさせる式の代わりにアンダースコアを使用することで、束縛を避けることができます。この時、アンダースコアは匿名引数です。
+
 ``` purescript
 case _ of
   0 -> "None"
@@ -700,7 +756,11 @@ case _ of
   _ -> "Some"
 ```
 
+<!--
 This is equivalent to
+-->
+これは以下と同等です：
+
 ```purescript
 \x -> case x of
   0 -> "None"
