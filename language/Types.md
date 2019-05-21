@@ -300,7 +300,7 @@ since the skolemized type variable ``a`` does not unify with ``Int``.
 <!--
 A row of types represents an unordered collection of named types, with duplicates. Duplicate labels have their types collected together in order, as if in a ``NonEmptyList``. This means that, conceptually, a row can be thought of as a type-level ``Map Label (NonEmptyList Type)``.
 -->
-型の列は、名前付きでの型から成る重複可能で順不同な集合です。重複するラベルは順番に型がまとめられ、``NonEmptyList``のようになります。これは概念的には、列は型レベルの``Map Label (NonEmptyList Type)``であると考えられるということです。
+型の列は、名前付きの型から成る重複可能で順不同な集合です。重複するラベルは順番に型がまとめられ、``NonEmptyList``のようになります。これは概念的には、列は型レベルの``Map Label (NonEmptyList Type)``であると考えられるということです。
 
 <!--
 Rows are not of kind ``Type``: they have kind ``# k`` for some kind ``k``, and so rows cannot exist as a value. Rather, rows can be used in type signatures to define record types or other type where labelled, unordered types are useful.
