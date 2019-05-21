@@ -87,23 +87,38 @@ sort :: forall a. (Ord a) => Array a -> Array a
 sort xs = [...]
 ```
 
+<!--
 ## Top-level declarations
+-->
+## トップレベル宣言
 
+<!--
 Values at the top level of a module are defined by providing a name followed by an equals sign and then the value to associate:
+-->
+モジュールのトップレベルの値は、名前の後に等号とそれに関連づける値を書くことで宣言されます：
 
 ``` purescript
 one = 1
 ```
 
+<!--
 Functions can also be defined at the top level by providing a list of patterns on the left hand side of the equals sign:
+-->
+等号の左側にパターンの羅列を書くことで、トップレベルに関数を宣言することもできます。
 
 ``` purescript
 add x y = x + y
 ```
 
+<!--
 See the section on pattern matching for more details about the kinds of patterns that can be used here.
+-->
+ここで使えるパターンの種類についてさらに詳しく知りたいなら、パターンマッチの章を見てください。
 
+<!--
 Functions using pattern matching may be defined multiple times to handle different pattern matches:
+-->
+パターンマッチを使う関数は異なるパターンに対応するために複数回定義されることがあります：
 
 ``` purescript
 isEmpty [] = true
