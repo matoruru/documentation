@@ -469,11 +469,20 @@ This is equivalent to:
 \rec -> rec { foo = 1 }
 ```
 
+<!--
 ## Binary Operators
+-->
+##  ２項演算子
 
+<!--
 Operators in PureScript are just regular binary functions. In particular, no operators are built into the language; an overview of operators defined in libraries such as the `Prelude` is therefore outside the scope of this reference.
+-->
+PureScriptの演算子は単なる２変数関数です。そして、言語に組み込まれた演算子はなく、大半は`Prelude`などのライブラリで定義されているため、このリファレンスの範囲外です。
 
+<!--
 Operators can be defined by providing an operator alias for an existing function (which must be binary, i.e. its type must be of the form `a -> b -> c`). For example:
+-->
+演算子は既に存在する関数の別名として定義することができます。その関数は２変数関数（`a -> b -> c`など）である必要があります。例えば：
 
 ``` purescript
 data List a = Nil | Cons a (List a)
@@ -486,7 +495,10 @@ append (Cons x xs) ys = Cons x (append xs ys)
 infixr 5 append as <>
 ```
 
+<!--
 This function can be used as follows::
+-->
+この関数は以下のように使用できます：
 
 ```purescript
 oneToThree = Cons 1 (Cons 2 (Cons 3 Nil))
@@ -495,55 +507,91 @@ fourToSix = Cons 4 (Cons 5 (Cons 6 Nil))
 oneToSix = oneToThree <> fourToSix
 ```
 
+<!--
 Operator alias declarations are made up of four parts:
+-->
+演算子の別名の宣言は4つのパートから成ります：
 
+<!--
 * The associativity: either `infixl`, `infixr`, or `infix`.
 * The precedence: an integer, between 0 and 9. Here, it is 5.
 * The function to alias: here, `append`
 * The operator: here, `<>`.
+-->
+* 結合規則: `infixl`、`infixr`または`infix`。
+* 優先順位: 0から9の整数。上記の例では5。
+* 関数: 上記の例では`append`。
+* 演算子（関数の別名）: 上記の例では`<>`。
 
+<!--
 The declaration determines how expressions involving this operator are bracketed.
+-->
+この宣言によって、演算子を括弧で囲む方法を決定します。
 
+<!--
 ### Associativity
+-->
+### 結合規則
 
+<!--
 `infixl` means that repeated applications are bracketed starting from the left. For example, `#` from Prelude is left-associative, meaning that an expression such as:
+-->
+`infixl`は、括弧で囲まれる適用の繰り返しが左から始まることを意味します。例えば、Preludeの`#`は左結合で、このような式は：
 
 ```
 products # filter isInStock # groupBy productCategory # length
 ```
 
+<!--
 is bracketed as:
+-->
+以下のように括弧で囲まれます：
 
 ```
 ((products # filter isInStock) # groupBy productCategory) # length
 ```
 
+<!--
 Similarly, `infixr` means "right-associative", and repeated applications are bracketed starting from the right. For example, `$` from Prelude is right-associative, so an expression like this:
+-->
+同様に、`infixr`は左結合を意味し、括弧で囲まれる適用の繰り返しが右から始まることを意味します。例えば、Preludeの`$`は右結合なので、このような式は：
 
 ```
 length $ groupBy productCategory $ filter isInStock $ products
 ```
 
+<!--
 is bracketed as:
+-->
+以下のように括弧で囲まれます：
 
 ```
 length $ (groupBy productCategory $ (filter isInStock $ products))
 ```
 
+<!--
 `infix` means "non-associative". Repeated use of a non-associative operator is disallowed. For example, `==` from Prelude is non-associative, which means that
+-->
+`infix`は非結合を表します。非結合の演算子を繰り返し使うことは許されていません。例えば、 Preludeの`==`は非結合です。これは以下のような式が：
 
 ```
 true == true == true
 ```
 
+<!--
 results in a [NonAssociativeError](../errors/NonAssociativeError.md):
+-->
+[非結合性エラー](../errors/NonAssociativeError.md)に含まれる以下のエラーを出力するということです：
 
 ```
 Cannot parse an expression that uses multiple instances of the non-associative operator Data.Eq.(==).
 Use parentheses to resolve this ambiguity.
 ```
 
+<!--
 Non-associative parsing via `infix` is most appropriate for operators `f` for which ``x `f` (y `f` z)`` is not necessarily the same as ``(x `f` y) `f` z)``, that is, operators which do not satisfy the algebraic property of associativity.
+-->
+`infix`による非結合は``x `f` (y `f` z)``と``(x `f` y) `f` z)``が必ずしも同じではなく、結合性の代数的規則を満たさない演算子`f`に最も適しています。
 
 ### Precedence
 
