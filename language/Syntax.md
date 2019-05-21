@@ -125,45 +125,80 @@ isEmpty [] = true
 isEmpty _ = false
 ```
 
+<!--
 This does not mean functions can be arbitrarily overloaded with different numbers or types of arguments though.
+-->
+これは、関数が異なる数や引数の型によって勝手にオーバーロードされることを意味しているのではありません。。
 
+<!--
 Guards can also be used in these definitions:
+-->
+ガードはこのような定義にも使用できます：
 
 ``` purescript
 isEmptyAlt xs | length xs == 0 = true
 isEmptyAlt _ = false
 ```
 
+<!--
 A top level declaration is generally defined with a type signature:
+-->
+トップレベルの宣言は一般的に型シグネチャと共に定義されます。
 
 ```purescript
 multiply :: Number -> Number -> Number
 multiply x y = x * y
 ```
 
+<!--
 Type signatures are not required for top-level declarations in general, but is good practice to do so. See the section on types for more details.
+-->
+型シグネチャは一般的にはトップレベル宣言の際に必須ではありませんが、良い作法です。詳しくは型の章を見てください。
 
+<!--
 ## Function application
+-->
+## 関数適用
 
+<!--
 Function application is indicated by just the juxtaposition of a function with its arguments:
+-->
+関数適用は関数とその引数を並べることで表します：
 
 ``` purescript
 add 10 20
 ```
 
+<!--
 PureScript functions are defined as curried, so partial application has no special syntax:
+-->
+PureScriptの関数はカリー化されているので、部分適用に特別な構文は必要ありません：
 
 ``` purescript
 add10 = add 10
 ```
 
+<!--
 In fact, `add 10 20` is parsed as `(add 10) 20`.
+-->
+実は、`add 10 20`は`(add 10) 20`として解析されます。
 
+<!--
 ## Literals
+-->
+## リテラル
 
+<!--
 ### Numbers
+-->
+### 数値
 
-Numeric literals can be integers (type `Int`) or floating point numbers (type `Number`). Floating point numbers are identified by a decimal point. Integers in hexadecimal notation should be preceded by the characters `0x`:
+<!--
+Numeric literals can be integers (type `Int`) or floating point numbers (type `Number`). Floating point numbers are identified by a decimal point.
+Integers in hexadecimal notation should be preceded by the characters `0x`:
+-->
+数値リテラルは整数(`Int`型)または浮動小数点数(`Number`型)になります。浮動小数点数は小数点によって識別されます。
+16進表記の整数の前には`0x`を書く必要があります：
 
 ``` purescript
 16 :: Int
@@ -171,9 +206,15 @@ Numeric literals can be integers (type `Int`) or floating point numbers (type `N
 16.0 :: Number
 ```
 
+<!--
 ### Strings
+-->
+### 文字列
 
+<!--
 String literals are enclosed in double-quotes and may extend over multiple lines. Line breaks should be surrounded by slashes as follows:
+-->
+文字列リテラルはダブルクォーテーションによって囲まれています。複数行にするためには、改行をバックスラッシュによって囲む必要があります。
 
 ``` purescript
 "Hello World"
@@ -182,11 +223,20 @@ String literals are enclosed in double-quotes and may extend over multiple lines
 \World"
 ```
 
+<!--
 Line breaks will be omitted from the string when written this way.
+-->
+このように書かれているときには、改行は文字列から省略されます。
 
+<!--
 #### Triple-quote Strings
+-->
+#### トリプルクォート文字列
 
+<!--
 If line breaks are required in the output, they can be inserted with `\n`. Alternatively, you can use triple double-quotes to prevent special parsing of escaped symbols. This also allows the use of double quotes within the string with no need to escape them:
+-->
+出力に改行が必要なら文字列中に`\n`を含めることができますが、その代わりにダブルクォートを3つ使うことで、エスケープされた記号の特殊な解析を防ぐことができます：
 
 ``` purescript
 jsIsHello :: String
@@ -197,28 +247,49 @@ function isHello(greeting) {
 """
 ```
 
+<!--
 This method of declaring strings is especially useful when writing regular expression strings.
+-->
+この文字列宣言の方法は、正規表現文字列を書くときに特に便利です。
 
 ```
 regex ".+@.+\\..+" noFlags
 regex """.+@.+\..+""" noFlags
 ```
 
+<!--
 The example regular expression above is a very simple email address validator. Both are equivalent, but the second one, using triple double-quotes, is much easier to write and maintain. This is even more true when writing complex regular expressions, as many are.
+-->
+上記の正規表現は非常にシンプルなメールアドレス妥当性検証器です。2つの書き方は同等ですが、トリプルクォートを使う方が、書く時も保守する時も簡単です。これは複雑な正規表現を書くときに更に有用です。
 
+<!--
 ### Booleans
+-->
+### 真理値
 
+<!--
 The boolean literals are `true` and `false`.
+-->
+真理値リテラルは`true`と`false`です。
 
+<!--
 ### Functions
+-->
+### 関数
 
+<!--
 Function values (sometimes called _lambdas_) are introduced by using a backslash followed by a list of argument names:
+-->
+関数値（*ラムダ式*と呼ばれることもあります）はバックスラッシュのあとに引数リストを書くことで表現できます：
 
 ``` purescript
 \a b -> a + b
 ```
 
+<!--
 which would correspond to the following JavaScript:
+-->
+これは以下のJavaScriptに対応します：
 
 ``` javascript
 function (a) {
