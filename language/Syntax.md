@@ -1,32 +1,56 @@
+<!--
 # Syntax
+-->
+# 構文
 
+<!--
 ## Whitespace Rules
+-->
+## 空白規則
 
+<!--
 Syntax is whitespace sensitive. The general rule of thumb is that declarations which span multiple lines should be indented past the column on which they were first defined on their subsequent lines.
+-->
+構文は空白に敏感です。一般的な経験則としては、複数行に分けられた宣言の2行目以降は1行目よりも深い位置にあるべきです。
 
+<!--
 That is, the following is valid:
+-->
+これは正しいです：
 
 ``` purescript
 foo = bar +
   baz
 ```
 
+<!--
 But this is not:
+-->
+これは正しくありません：
 
 ``` purescript
 foo = bar +
 baz
 ```
 
+<!--
 ## Comments
+-->
+## コメント
 
+<!--
 A single line comment starts with `--`:
+-->
+1行コメントは`--`で始まります：
 
 ``` purescript
 -- This is a comment
 ```
 
+<!--
 Multi-line comments are enclosed in `{-` and `-}`:
+-->
+複数行コメントは`{-`と`-}`で囲みます：
 
 ``` purescript
 {-
@@ -35,7 +59,10 @@ Multi-line comments are enclosed in `{-` and `-}`:
 -}
 ```
 
+<!--
 Comments that start with a pipe character, `|`, are considered documentation, and will appear in the output of tools like `psc-docs` and Pursuit. For example:
+-->
+パイプ文字（|）で始まるコメントはドキュメントとして扱われ、ドキュメント生成ツール`psc-docs`の出力とPursuitで見えるようになります。例をお見せします：
 
 ``` purescript
 -- | `bool` performs case analysis for the `Boolean` data type, like an `if` statement.
@@ -44,7 +71,11 @@ bool true x _ = x
 bool false _ x = x
 ```
 
+<!--
 Note that, unlike Haskell, every line which should be considered documentation must start with a pipe. This allows you to do things like:
+-->
+Haskellとは異なり、ドキュメントに含めるべき行は全てパイプ文字から始まらなければなりません。したがって以下のようなことが可能です：
+
 
 ``` purescript
 -- | Sort an array based on its `Ord` instance.
