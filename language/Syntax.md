@@ -62,7 +62,7 @@ Multi-line comments are enclosed in `{-` and `-}`:
 <!--
 Comments that start with a pipe character, `|`, are considered documentation, and will appear in the output of tools like `psc-docs` and Pursuit. For example:
 -->
-パイプ文字（|）で始まるコメントはドキュメントとして扱われ、ドキュメント生成ツール`psc-docs`の出力とPursuitで見えるようになります。例をお見せします：
+パイプ文字（|）で始まるコメントはドキュメントと見なされ、ドキュメント生成ツール`psc-docs`の出力とPursuitで見えるようになります。例をお見せします：
 
 ``` purescript
 -- | `bool` performs case analysis for the `Boolean` data type, like an `if` statement.
