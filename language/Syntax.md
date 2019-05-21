@@ -299,81 +299,130 @@ function (a) {
 }
 ```
 
+<!--
 ### Arrays
+-->
+### 配列
 
+<!--
 Array literals are surrounded by square brackets, as in JavaScript:
+-->
+配列リテラルはJavaScriptと同様に角括弧で囲まれています：
 
 ``` purescript
 []
 [1, 2, 3]
 ```
 
+<!--
 ### Records
+-->
+### レコード
 
+<!--
 Record literals are surrounded by braces, as in JavaScript:
+-->
+レコードリテラルはJavaScriptと同様に波括弧で囲まれています：
 
 ``` purescript
 {}
 { foo: "Foo", bar: 1 }
 ```
 
+<!--
 Record literals with wildcards can be used to create a function that produces the record instead:
+-->
+ワイルドカードを含むレコードリテラル表記は、レコードを作成する関数を生成します：
 
 ``` purescript
 { foo: _, bar: _ }
 ```
 
+これは以下と同等です：
 is equivalent to:
 
 ``` purescript
 \foo bar -> { foo: foo, bar: bar }
 ```
 
+<!--
 ## Additional forms with Records
+-->
+## レコードの使い方
 
+<!--
 ### Property Accessors
+-->
+### プロパティアクセサ
 
+<!--
 To access a property of a record, use a dot followed by the property name, as in JavaScript:
+-->
+レコードのプロパティにアクセスするためには、JavaScriptと同様に、ドットの後にプロパティ名を書きます：
 
 ``` purescript
 rec.propertyName
 ```
 
+<!--
 There are also partially applied accessors, where an underscore is followed by a property name:
+-->
+部分適用のアクセサもあります。アンダースコアの後にプロパティ名を書きます：
 
 ``` purescript
 _.propertyName
 ```
 
+<!--
 This is equivalent to:
+-->
+これは以下と同等です：
 
 ``` purescript
 \rec -> rec.propertyName
 ```
 
+<!--
 These work with any number of levels:
+-->
+これはプロパティがいくつ並んでも可能です：
 
 ``` purescript
 _.nested.property.name
 ```
 
+<!--
 ### Record Updates
+-->
+### レコード更新
 
+<!--
 Properties on records can be updated using the following syntax:
+-->
+レコードのプロパティは以下の構文を使って更新できます：
 
 ``` purescript
 rec { key1 = value1, ..., keyN = valueN, nestedKey { subKey = value, ... } }
 ```
 
+<!--
 Some or all of the keys may be updated at once, and records inside of records can also be updated.
+-->
+キーの全てまたは一部を一度に更新することもでき、レコード内のレコードも更新されます。
 
+<!--
 For example, the following function increments the `foo` property on its argument:
+-->
+例えば、以下の関数は引数のプロパティ`foo`の値をインクリメントします：
 
 ``` purescript
 \rec -> rec { foo = rec.foo + 1 }
 ```
 
+<!--
 [Nested record updates](https://liamgoodacre.github.io/purescript/records/2017/01/29/nested-record-updates.html) look like this:
+-->
+[ネストされたレコードの更新](https://liamgoodacre.github.io/purescript/records/2017/01/29/nested-record-updates.html) look like this:
 
 ``` purescript
 r = { val: -1
@@ -384,25 +433,37 @@ r = { val: -1
 r' = r { level1 { val = 1 } }
 ```
 
+<!--
 Wildcards can also be used in updates to produce a partially applied update:
+-->
+ワイルドカードを更新に使用して、部分適用の更新を生成することも可能です：
 
 ``` purescript
 rec { foo = _ }
 ```
 
+<!--
 This is equivalent to:
+-->
+これは以下と同等です：
 
 ``` purescript
 \foo -> rec { foo = foo }
 ```
 
+<!--
 An underscore can also appear in the object position in an updater:
+-->
+アンダースコアは更新器のオブジェクトの位置に書くことも可能です：
 
 ``` purescript
 _ { foo = 1 }
 ```
 
+<!--
 This is equivalent to:
+-->
+これは以下と同等です：
 
 ``` purescript
 \rec -> rec { foo = 1 }
