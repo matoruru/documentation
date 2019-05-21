@@ -390,9 +390,15 @@ Polymorphic types may be predicated on one or more ``constraints``. See the chap
 -->
 多相型は1つ以上の``制約``の上に成り立っています。詳しくは型クラスの章を見てください。
 
+<!--
 ## Type Annotations
+-->
+## 型注釈
 
+<!--
 Most types can be inferred (not including Rank N Types and constrained types), but annotations can optionally be provided using a double-colon, either as a declaration or after an expression:
+-->
+高階多相型と制約のある型を除いたほとんどの型は推論されますが、コロンを2つ用いた型注釈を任意で提供することができ、宣言として書くことも、式の後に書くこともできます。
 
 ```purescript
 -- Defined in Data.Semiring
@@ -411,21 +417,48 @@ semiring1 = one
 equal1 = one :: forall a. Semiring a => Eq a => a
 ```
 
+<!--
 ## Kind System
+-->
+## 種システム
 
+<!--
 The kind system defines the following kinds:
+-->
+種システムは以下の種を定義します：
 
+<!--
 - ``Type``, the kind of types.
 - Arrow kinds ``k1 -> k2``
 - Row kinds ``# k``
 - User-defined kinds, such as ``Control.Monad.Eff.Effect``, the kind of effects.
+-->
+- 型の種 ``Type``
+- 高階種 ``k1 -> k2``
+- 列種 ``# k``
+- ユーザ定義種 ``Control.Monad.Eff.Effect``など。この例は作用の種です。
 
+<!--
 ## Row Kinds
+-->
+## 列種
 
+<!--
 The kind ``# k`` of rows is used to classify labelled, unordered collections of types of kind ``k``.
+-->
+列の種``# k``はラベル付きの分類に使われ、種``k``の型の非順序集合です。
 
+<!--
 For example ``# Type`` is the kind of rows of types, as used to define records, and ``# Control.Monad.Eff.Effect`` is the kind of rows of effects, used to define the monad ``Control.Monad.Eff.Eff`` of extensible effects.
+-->
+例えば、``# Type``は型の列の種で、レコードの定義に使われます。そして、``# Control.Monad.Eff.Effect``は作用の列の種で、これは拡張可能の作用モナド``Control.Monad.Eff.Eff``を定義するために使われます。
 
+<!--
 ## Quantification
+-->
+## 量化
 
+<!--
 A type variable can refer to not only a type or a row, but a type constructor, or row constructor etc., and type variables with those kinds can be bound inside a ``forall`` quantifier.
+-->
+型変数は型や列だけでなく型コンストラクタや行コンストラクタなどを表すこともでき、そのような種を持つ型変数は``forall``量化子によって束縛されます。
