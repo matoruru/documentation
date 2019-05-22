@@ -128,7 +128,7 @@ isEmpty _ = false
 <!--
 This does not mean functions can be arbitrarily overloaded with different numbers or types of arguments though.
 -->
-これは、関数が異なる数や引数の型によって勝手にオーバーロードされることを意味しているのではありません。。
+これは、関数が異なる数や引数の型によって勝手にオーバーロードされることを意味しているのではありません。
 
 <!--
 Guards can also be used in these definitions:
@@ -422,7 +422,7 @@ For example, the following function increments the `foo` property on its argumen
 <!--
 [Nested record updates](https://liamgoodacre.github.io/purescript/records/2017/01/29/nested-record-updates.html) look like this:
 -->
-[ネストされたレコードの更新](https://liamgoodacre.github.io/purescript/records/2017/01/29/nested-record-updates.html) look like this:
+[ネストされたレコードの更新](https://liamgoodacre.github.io/purescript/records/2017/01/29/nested-record-updates.html)は以下のようにします:
 
 ``` purescript
 r = { val: -1
@@ -768,19 +768,29 @@ This is equivalent to
   _ -> "Some"
 ```
 
+<!--
+## If-Then-Else expression式
+-->
+## If-Then-Else式
 
-
-## If-Then-Else expressions
-
+<!--
 The `if`, `then` and `else` keywords can be used to create conditional expressions similar to a JavaScript ternary expression. The `else` block is always required:
+-->
+`if`とThen`、`else`のキーワードはJavaScriptの3項演算子に似た条件式を作成するために使用します。`else`ブロックは必須です：
 
 ``` purescript
 conditional = if 2 > 1 then "ok" else "oops"
 ```
 
+<!--
 ## Let and where bindings
+-->
+## let・where束縛
 
+<!--
 The `let` keyword introduces a collection of local declarations, which may be mutually recursive, and which may include type declarations:
+-->
+`let`キーワードは局所宣言の集まりを説明します。局所宣言は互いに再帰することが可能で、型宣言を持つことも可能です：
 
 ``` purescript
 factorial :: Int -> Int
@@ -793,7 +803,10 @@ factorial =
     go 1
 ```
 
+<!--
 The `where` keyword can also be used to introduce local declarations at the end of a value declaration:
+-->
+`where`キーワードも局所宣言に用いられ、これは値宣言の末尾に書きます。
 
 ``` purescript
 factorial :: Int -> Int
@@ -804,9 +817,15 @@ factorial = go 1
   go acc n = go (acc * n) (n - 1)
 ```
 
+<!--
 ## Indentation in binding blocks
+-->
+## 束縛ブロックのインデント
 
+<!--
 Indentation of a binding's body is significant. If defining multiple bindings, as in a let-in block, each binding must have the same level of indentation. The body of the binding's definition, then, must be further indented. To illustrate:
+-->
+束縛の本体は重要です。let-inブロックのように複数の束縛を定義するなら、各宣言の頭を同じ位置に揃える必要があります。束縛の定義の本体は、さらにインデントされていなければなりません。例えば：
 
 ``` purescript
 f =
@@ -836,11 +855,20 @@ f =
     log "test"
 ```
 
+<!--
 ## Do notation
+-->
+## Do記法
 
+<!--
 The `do` keyword introduces simple syntactic sugar for monadic expressions.
+-->
+`do`キーワードはモナド式のシンプルな糖衣構文です。
 
+<!--
 Here is an example, using the monad for the [`Maybe`](https://github.com/purescript/purescript-maybe) type:
+-->
+例として、[`Maybe`](https://github.com/purescript/purescript-maybe)型のモナドを使います：
 
 ``` purescript
 maybeSum :: Maybe Number -> Maybe Number -> Maybe Number
@@ -851,17 +879,34 @@ maybeSum a b = do
   pure result
 ```
 
+<!--
 `maybeSum` takes two values of type ``Maybe Number`` and returns their sum if neither value is `Nothing`.
+-->
+`maybeSum`は``Maybe Number``型の2つの引数を取り、valueが`Nothing`でなければ、それらの合計を返します。
 
+<!--
 When using `do` notation, there must be a corresponding instance of the `Monad` type class for the return type.
+-->
+`do`記法を使う時、戻り値の型に対応する`モナド`型クラスのインスタンスが存在しなければなりません。
 
+<!--
 Statements can have the following form:
+-->
+文は以下のような形式になります：
 
+<!--
 - `a <- x` which desugars to `x >>= \a -> ...`
 - `x` which desugars to `x >>= \_ -> ...` or just `x` if this is the last statement.
 - A let binding `let a = x`. Note the lack of the `in` keyword.
+-->
+- `a <- x`は`x >>= \a -> ...`のように脱糖されます。
+- `x`は`x >>= \_ -> ...`のように脱糖されるか、 文の最終行である場合は単に`x`になります。
+- `let a = x`はlet束縛です。`in`キーワードがないことに注意してください。
 
+<!--
 The example `maybeSum` desugars to::
+-->
+例として、`maybeSum`の脱糖後は以下のようになります：
 
 ``` purescript
 maybeSum a b =
@@ -870,4 +915,8 @@ maybeSum a b =
       let result = n + m
       in pure result
 ```
+
+<!--
 Note: (>>=) is the `bind` function for the `Bind` type as defined in the [Prelude package](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Prelude#t:Bind).
+-->
+※注: (>>=)は[Preludeパッケージ](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Prelude#t:Bind)で定義されている`Bind`型の`bind`関数です。
