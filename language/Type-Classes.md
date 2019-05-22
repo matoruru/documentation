@@ -78,9 +78,16 @@ main = do
   log $ myShow MysteryItem -- Invalid
 ```
 
+<!--
 ## Multi-Parameter Type Classes
+-->
+## 多変数型クラス
 
+<!--
 TODO. For now, see the section in [PureScript by Example](https://leanpub.com/purescript/read#leanpub-auto-multi-parameter-type-classes).
+-->
+TODO。 今は[PureScript by Example](https://leanpub.com/purescript/read#leanpub-auto-multi-parameter-type-classes)を参照してください。
+
 
 ## Superclasses
 
