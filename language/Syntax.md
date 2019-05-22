@@ -776,7 +776,7 @@ This is equivalent to
 <!--
 The `if`, `then` and `else` keywords can be used to create conditional expressions similar to a JavaScript ternary expression. The `else` block is always required:
 -->
-`if`とThen`、`else`のキーワードはJavaScriptの3項演算子に似た条件式を作成するために使用します。`else`ブロックは必須です：
+`if`と`Then`、`else`のキーワードはJavaScriptの3項演算子に似た条件式を作成するために使用します。`else`ブロックは必須です：
 
 ``` purescript
 conditional = if 2 > 1 then "ok" else "oops"
