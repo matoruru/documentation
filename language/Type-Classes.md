@@ -202,12 +202,17 @@ Functional dependencies are especially useful with the various `Prim` typeclasse
 <!--
 See also the section in [PureScript by Example](https://leanpub.com/purescript/read#leanpub-auto-functional-dependencies).
 -->
-次の本の該当する章も見てください。[PureScript by Example](https://leanpub.com/purescript/read#leanpub-auto-functional-dependencies)
+本の[該当する章(PureScript by Example)](https://leanpub.com/purescript/read#leanpub-auto-functional-dependencies)も見てください。
 
-
+<!--
 ## Type Class Deriving
+-->
+## 型クラス導出
 
+<!--
 Some type class instances can be derived automatically by the PureScript compiler. To derive a type class instance, use the `derive instance` keywords:
+-->
+いくつかの型クラスインスタンスはPureScriptコンパイラによって自動的に導出されます。型クラスインスタンスを導出するためには、`derive instance`キーワードを使います：
 
 ```purescript
 newtype Person = Person { name :: String, age :: Int }
@@ -215,26 +220,49 @@ newtype Person = Person { name :: String, age :: Int }
 derive instance eqPerson :: Eq Person
 derive instance ordPerson :: Ord Person
 ```
-Currently, the following type classes can be derived:
 
+<!--
+Currently, the following type classes can be derived:
+-->
+現在、以下の型クラスが導出可能です：
+
+<!--
 - [Data.Generic.Rep (class Generic)](https://pursuit.purescript.org/packages/purescript-generics-rep/6.0.0/docs/Data.Generic.Rep#t:Generic)
 - [Data.Eq (class Eq)](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Eq#t:Eq)
 - [Data.Ord (class Ord)](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Ord#t:Ord)
 - [Data.Functor (class Functor)](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Functor#t:Functor)
 - [Data.Newtype (class Newtype)](https://pursuit.purescript.org/packages/purescript-newtype/3.0.0/docs/Data.Newtype#t:Newtype)
+-->
+- [Data.Generic.Rep (Genericクラス)](https://pursuit.purescript.org/packages/purescript-generics-rep/6.0.0/docs/Data.Generic.Rep#t:Generic)
+- [Data.Eq (Eqクラス)](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Eq#t:Eq)
+- [Data.Ord (Ordクラス)](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Ord#t:Ord)
+- [Data.Functor (Functorクラス)](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Functor#t:Functor)
+- [Data.Newtype (Newtypeクラス)](https://pursuit.purescript.org/packages/purescript-newtype/3.0.0/docs/Data.Newtype#t:Newtype)
 
+<!--
 ## Compiler-Solvable Type Classes
+-->
+## コンパイラで解決可能な型クラス
 
+<!--
 Some type classes can be automatically solved by the PureScript Compiler without requiring you place a PureScript statement, like `derive instance`, in your source code.
+-->
+いくつかの型クラスは`derive instance`のようなキーワードを書くことなくPureScriptコンパイラによって自動的に解決可能です。
 
 ``` purescript
 foo :: forall t. (Warn "Custom warning message") => t -> t
 foo x = x
 ```
 
+<!--
 Automatically solved type classes are included in the [Prim](https://pursuit.purescript.org/builtins/docs/Prim) modules:
+-->
+自動的に解決される型は[Prim](https://pursuit.purescript.org/builtins/docs/Prim)モジュールに含まれています：
 
+<!--
 Symbol-related classes
+-->
+記号関連のクラス
 
 - [`IsSymbol`](https://pursuit.purescript.org/packages/purescript-symbols/3.0.0/docs/Data.Symbol#t:IsSymbol)
 - [`Append`](https://pursuit.purescript.org/builtins/docs/Prim.Symbol#t:Append)
@@ -252,7 +280,10 @@ Symbol-related classes
 
 - [`RowToList`](https://pursuit.purescript.org/builtins/docs/Prim.RowList#t:RowToList)
 
+<!--
 Other classes
+-->
+その他のクラス
 
 - [`Partial`](https://pursuit.purescript.org/builtins/docs/Prim#t:Partial)
 - [`Fail`](https://pursuit.purescript.org/builtins/docs/Prim.TypeError#t:Fail)
