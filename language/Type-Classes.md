@@ -1,10 +1,23 @@
+<!--
 # Type Classes
+-->
+# 型クラス
 
+<!--
 PureScript supports type classes via the `class` and `instance` keywords.
+-->
+PureScriptは`class`と`instance`のキーワードによって型クラスをサポートしています。
 
+<!--
 Types appearing in class instances must be of the form `String`, `Number`, `Boolean`, or `C t1 ... tn` where `C` is a type constructor (including `->` and `t_i` are types of the same form).
+-->
+クラスインスタンスに現れる型は`String`、`Number`、`Boolean`または`C t1 ... tn`のような形でなければなりません。`C`は型コンストラクタです(`->`と`t_i`は
+同じ形式の型)。
 
+<!--
 Here is an example of the `Show` typeclass, with instances for `String`, `Boolean` and `Array`:
+-->
+以下は`Show`型クラスのインスタンス`String`、`Boolean`、`Array`の例です：
 
 ```purescript
 class Show a where
@@ -19,17 +32,29 @@ instance showBoolean :: Show Boolean where
 
 instance showArray :: (Show a) => Show (Array a) where
   show xs = "[" <> joinWith ", " (map show xs) <> "]"
-
 example = show [true, false]
 ```
 
+
+<!--
 Overlapping instances are no longer allowed in PureScript. To write overlapping instances, you should use Instance Chains.
+-->
+インスタンスの重複はPureScriptでは許されていません。インスタンスの重複を書くためには、インスタンスチェーンを使う必要があります。
 
+<!--
 ## Instance Chains
+-->
+## インスタンスチェーン
 
+<!--
 PureScript implements a form of instance chains that work on groups of instances matching by parameters. This means that constraints are not considered when choosing instances. However, you can still write a chain of instances in consecutive order that will be matched top to bottom by using the `else` keyword.
+-->
+PureScriptでは、引数によってマッチするインスタンスのグループを処理するインスタンスチェーンを実装しています。これはインスタンスを選ぶときに制約が考慮されないことを意味します。しかし、`else`キーワードを使用して、上から下の順でマッチするインスタンスのチェーンを書くことが可能です。
 
+<!--
 Here is an example of a `MyShow` typeclass, with instances for `String`, `Boolean`, and any other type.
+-->
+以下は`MyShow`型クラスのインスタンス`String`、`Boolean`と任意の型の例です。
 
 ```purescript
 class MyShow a where
