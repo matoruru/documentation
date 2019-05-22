@@ -88,19 +88,30 @@ TODO. For now, see the section in [PureScript by Example](https://leanpub.com/pu
 -->
 TODO。 今は[PureScript by Example](https://leanpub.com/purescript/read#leanpub-auto-multi-parameter-type-classes)を参照してください。
 
-
+<!--
 ## Superclasses
+-->
+## スーパークラス
 
+<!--
 Superclass implications can be indicated in a class declaration with a backwards fat arrow `<=`:
+-->
+スーパークラスの包含はクラス宣言の中で逆向きの太矢印`<=`を使って示します：
 
 ```purescript
 class (Monad m) <= MonadFail m where
   fail :: forall a. String -> m a
 ```
 
+<!--
 This code example defines a `MonadFail` class with a `Monad` superclass: any type which defines an instance of `MonadFail` will be required to define an instance of `Monad` too.
+-->
+この例のコードは`Monad`をスーパークラスに持つ`MonadFail`クラスを宣言しています。`MonadFail`のインスタンスを定義する任意の型は`Monad`のインスタンスも定義していることを要求されます。
 
+<!--
 Superclass instances will be used when searching for an instance of a subclass. For example, in the code below, the `Applicative` constraint introduced by the `pure` function can be discharged since `Applicative` is a superclass of `Monad`, which is in turn a superclass of `MonadFail`:
+-->
+スーパークラスのインスタンスはサブクラスのインスタンスを探すときに使用されます。例えば、以下のコードでは、`Applicative`は`Monad`のスーパークラス、つまり`MonadFail`のスーパークラスであるため、`pure`関数によって導入された`Applicative`制約は解除できます。
 
 ```purescript
 assert :: forall m. (MonadFail m) => Boolean -> m Unit
@@ -108,11 +119,20 @@ assert true = pure unit
 assert false = fail "Assertion failed"
 ```
 
+<!--
 ## Orphan Instances
+-->
+## 孤児インスタンス
 
+<!--
 Type class instances which are defined outside of both the module which defined the class and the module which defined the type are called *orphan instances*. Some programming languages (including Haskell) allow orphan instances with a warning, but in PureScript, they are forbidden. Any attempt to define an orphan instance in PureScript will mean that your program does not pass type checking.
+-->
+クラスを定義したモジュールと型を定義したモジュールの両方の外側で定義された型クラスのインスタンスを*孤児インスタンス*と呼びます。Haskellを含むいくつかのプログラミング言語は、孤児インスタンスを警告を伴って許可します。しかしPureScriptではこれを禁止しています。PureScriptで孤児インスタンスを定義しようとすると、あなたのプログラムは型検査を通りません。
 
+<!--
 For example, the `Semigroup` type class is defined in the module `Data.Semigroup`, and the `Int` type is defined in the module `Prim`. If we attempt to define a `Semigroup Int` instance like this:
+-->
+例えば、`Semigroup`型クラスはモジュール`Data.Semigroup`の中でi定義されていて、`Int`型はモジュール`Prim`の中で定義されています。もし私達が次のように`Semigroup Int`インスタンスを定義しようとすると：
 
 ```purescript
 module MyModule where
@@ -123,7 +143,10 @@ instance semigroupInt :: Semigroup Int where
   append = (+)
 ```
 
+<!--
 This will fail, because `semigroupInt` is an orphan instance. You can use a `newtype` to get around this:
+-->
+これは失敗します。`semigroupInt`は孤児インスタンスだからです。`newtype`を使うことでこれを回避できます：
 
 ```purescript
 module MyModule where
@@ -136,13 +159,25 @@ instance semigroupAddInt :: Semigroup AddInt where
   append (AddInt x) (AddInt y) = AddInt (x + y)
 ```
 
+<!--
 In fact, a type similar to this `AddInt` is provided in `Data.Monoid.Additive`, in the `monoid` package.
+-->
+実は、この`AddInt`に似た型が`monoid`パッケージの`Data.Monoid.Additive`で提供されています。
 
+<!--
 For multi-parameter type classes, the orphan instance check requires that the instance is either in the same module as the class, or the same module as at least one of the types occurring in the instance. (TODO: example)
+-->
+多変数型クラスのために、孤児インスタンス検査は、そのインスタンスがそのクラスと同じモジュール内にあるか、そのインスタンスに存在する型の少なくとも1つと同じモジュール内にあることを要求します。
 
+<!--
 ## Functional Dependencies
+-->
+## 関数型依存性
 
+<!--
 Instances for type classes with multiple parameters generally only need a subset of the parameters to be concrete to match instances. Declarations on which parameters can determine others in instance heads are called Functional Dependencies. For example:
+-->
+一般的に、複数の引数を持つクラスのインスタンスは、マッチして具象になるために引数の一部のみを必要とします。どのパラメータがインスタンスヘッド内の他のパラメータを決定できるかという宣言を関数型依存性と呼びます。例えば：
 
 ```purescript
 class TypeEquals a b | a -> b, b -> a where
@@ -154,11 +189,21 @@ instance refl :: TypeEquals a a where
   from a = a
 ```
 
+<!--
 The `|` symbol marks the beginning of functional dependencies, which are separated by a comma if there are more than one. In this case, the first parameter determines the type of the second, and the second determines the type of the first.
+-->
+`|`記号は関数型依存性の始まりを意味し、1つ以上ある場合はカンマで区切ります。この場合、1つ目の引数は2つ目の型を、2つ目の引数は1つ目の型を決定します。
 
+<!--
 Functional dependencies are especially useful with the various `Prim` typeclasses, such as `Prim.Row.Cons`: https://pursuit.purescript.org/builtins/docs/Prim.Row#t:Cons
+-->
+関数型依存性はさまざまな`Prim`型クラスで特に便利です。例えば、[`Prim.Row.Cons`](https://pursuit.purescript.org/builtins/docs/Prim.Row#t:Cons)などです。
 
+<!--
 See also the section in [PureScript by Example](https://leanpub.com/purescript/read#leanpub-auto-functional-dependencies).
+-->
+次の本の該当する章も見てください。[PureScript by Example](https://leanpub.com/purescript/read#leanpub-auto-functional-dependencies)
+
 
 ## Type Class Deriving
 
