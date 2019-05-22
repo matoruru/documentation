@@ -1,8 +1,17 @@
+<!--
 # Pattern Matching
+-->
+# パターンマッチ
 
+<!--
 Pattern matching deconstructs a value to bring zero or more expressions into scope. Pattern matches are introduced with the `case` keyword.
+-->
+パターンマッチは値を分解して0個以上の式をスコープに入れます。パターンマッチは`case`キーワードにより導入されます。
 
+<!--
 Pattern matches have the following general form:
+-->
+パターンマッチは一般的に次の形式で表されます：
 
 ```purescript
 case value of
@@ -11,20 +20,30 @@ case value of
   pattern -> result
 ```
 
+<!--
 Pattern matching can also be used in the declaration of functions, as we have already seen:
+-->
+既に見たように、パターンマッチは関数の宣言にも用いられます：
 
 ```purescript
 fn pattern_1 ... pattern_n = result
 ```
 
+<!--
 Patterns can also be used when introducing functions. For example:
+-->
+パターンは関数を導入する際にも用いられます。例えば：
 
 ```purescript
 example x y z = x * y + z
 ```
 
+<!--
 The following forms can be used for matching:
+-->
+以下のようなパターンが存在します：
 
+<!--
 - Wildcard patterns
 - Literal patterns
 - Variable patterns
@@ -32,14 +51,32 @@ The following forms can be used for matching:
 - Constructor patterns
 - Record patterns
 - Named patterns
+-->
+- ワイルドカードパターン
+- リテラルパターン
+- 変数パターン
+- 配列パターン
+- コンストラクタパターン
+- レコードパターン
+- 名前付きパターン
 
+<!--
 Guards and pattern guards are also supported.
+-->
+ガードとパターンガードもサポートされています。
 
+<!--
 The exhaustivity checker will introduce a `Partial` constraint for any pattern which is not exhaustive.
 By default, patterns must be exhaustive, since this `Partial` constraint will not be satisfied. The error can be silenced, however, by adding a local `Partial` constraint to your function.
+-->
+網羅性検査器は網羅されていないパターンのために`Partial`制約を導入します。
+デフォルトでは、`Partial`制約が満たされないために、パターンが網羅されていなければなりません。あなたの関数にローカルな`Partial`制約を追加することで、エラーを非表示にすることが可能です。
 
+<!--
 Wildcard Patterns
 -----------------
+-->
+ワイルドカードパターン
 
 The wildcard `_` matches any input and brings nothing into scope:
 
