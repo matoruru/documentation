@@ -77,6 +77,7 @@ Wildcard Patterns
 -----------------
 -->
 ワイルドカードパターン
+------------------
 
 The wildcard `_` matches any input and brings nothing into scope:
 
