@@ -132,7 +132,7 @@ Type class instances which are defined outside of both the module which defined 
 <!--
 For example, the `Semigroup` type class is defined in the module `Data.Semigroup`, and the `Int` type is defined in the module `Prim`. If we attempt to define a `Semigroup Int` instance like this:
 -->
-例えば、`Semigroup`型クラスはモジュール`Data.Semigroup`の中でi定義されていて、`Int`型はモジュール`Prim`の中で定義されています。もし私達が次のように`Semigroup Int`インスタンスを定義しようとすると：
+例えば、`Semigroup`型クラスはモジュール`Data.Semigroup`の中で定義されていて、`Int`型はモジュール`Prim`の中で定義されています。もし私達が次のように`Semigroup Int`インスタンスを定義しようとすると：
 
 ```purescript
 module MyModule where
