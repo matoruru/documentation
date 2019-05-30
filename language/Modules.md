@@ -1,6 +1,12 @@
+<!--
 # Modules
+-->
+# モジュール
 
+<!--
 All code in PureScript is contained in a module. Modules are introduced using the `module` keyword:
+-->
+PureScriptの全てのコードはモジュールに含まれます。モジュールは`module`キーワードによってu導入されます：
 
 ```purescript
 module A where
@@ -8,9 +14,15 @@ module A where
 id x = x
 ```
 
+<!--
 ## Importing Modules
+-->
+## モジュールの読み込み
 
+<!--
 A module can be imported using the `import` keyword. This is called an "open import" - it will create aliases for all of the values and types in the imported module:
+-->
+モジュールは`import`キーワードを使うことで読み込まれます。これは「openインポート」と呼ばれ、モジュール内の全ての値や型の別名を作成します：
 
 ```purescript
 module B where
@@ -18,7 +30,10 @@ module B where
 import A
 ```
 
+<!--
 Alternatively, a list of names to import can be provided in parentheses:
+-->
+代わりに、カッコ内に指定して読み込むことも可能です：
 
 ```purescript
 module B where
@@ -26,7 +41,10 @@ module B where
 import A (runFoo)
 ```
 
+<!--
 Values, operators (wrapped in parentheses), type constructors, data constructors, and type classes can all be explicitly imported. A type constructor can be followed by a list of associated data constructors to import in parentheses. A double dot (`..`) can be used to import all data constructors for a given type constructor:
+-->
+値、演算子（丸括弧で囲んでおく）、型コンストラクタ、データコンストラクタ、型クラスは全て明示的に読み込むことができます。型コンスタクタの後の丸括弧内に関連するデータコンストラクタを書き連ねることもでき、ピリオドを2つ(`..`)書くと、型コンストラクタの全てのデータコンストラクタがインポートされます。
 
 ```purescript
 module B where
@@ -34,7 +52,10 @@ module B where
 import A (runFoo, (.~), Foo(..), Bar(Bar))
 ```
 
+<!--
 Type classes are imported using the `class` keyword, kinds with `kind`:
+-->
+型クラスをインポートするには`class`キーワードを使います。種の場合は`kind`です。
 
 ```purescript
 module B where
@@ -42,9 +63,15 @@ module B where
 import A (class Fab, kind Effect)
 ```
 
+<!--
 ### Hiding imports
+-->
+### 除外インポート
 
+<!--
 It is also possible to exclude some names from an open import with the `hiding` keyword. This is useful to avoid import conflicts between modules:
+-->
+`hiding`キーワードを使って、openインポートから除外する名前を指定できます。これはモジュール間でインポートした名前が衝突することを防ぐときに便利です。
 
 ```purescript
 module C where
@@ -53,13 +80,25 @@ import A hiding (runFoo)
 import B (runFoo)
 ```
 
+<!--
 ## Qualified Imports
-  
+-->
+修飾インポート
+
+<!--
 Modules can also be imported qualified, which means that their names will not be brought directly into scope, but rather, aliased as a different module name.
+-->
+モジュールは修飾名付きでインポートすることもできます。つまり、モジュールの名前はそのままスコープに入れられるのではなく、別名として入れられます。
 
+<!--
 Following are some situations in which qualified imports are quite useful.
+-->
+以下は修飾インポートが非常に便利に使える場面です。
 
+<!--
 ### Using generically-named functions
+-->
+### 総称関数の使用
 
 ``` purescript
 import Data.Map as Map
@@ -68,9 +107,15 @@ a :: Map Int String
 a = Map.fromFoldable [ Tuple 1 "a" ]
 ```
 
+<!--
 Several data structure modules have a `fromFoldable` function which can be used to create an instance of that data structure from any other `Foldable` data structure. To clarify which `fromFoldable` function is being used, we can import that module's functions under a qualified name and use it qualified, like `Set.fromFoldable`.
+-->
+いくつかのデータ構造モジュールは、別の`Foldable`データ構造からそのデータ構造のインスタンスを作成できる`fromFoldable`関数を持っています。どの`fromFoldable`関数が使われているのかを明確にするために、`Set.fromFoldable`のようにインポートの際に付けた修飾名のあとに関数名を書くことができます。
 
+<!--
 Another example, using a fictitious module this time:
+-->
+別の例として、ここでは架空のモジュールを使います：
 
 ``` purescript
 import MyWebFramework as MyWebFramework
@@ -83,7 +128,10 @@ main = do
   -- `run elem`
 ```
 
+<!--
 Because "run" is a rather non-descript name, without knowing the type of a `run` function before reading it, it isn't clear what to expect the `run` function to do until we see that its module is `MyWebFramework`. To mitigate this confusion to new readers of this code, we can import and call it qualified - `MyWebFramework.run`.
+-->
+"run"はどこにでもありそうな名前なので、読む前にその関数の型を知らなければ、そのモジュールが`MyWebFramework`であると知るまでは`run`関数が何をするためのものなのかが不明確です。次の人がこのコードを読んだときの混乱を軽減するために、`MyWebFramework.run`のように修飾付きでインポートして使用することができます。
 
 ### Avoiding naming conflicts
 
