@@ -6,7 +6,7 @@
 <!--
 All code in PureScript is contained in a module. Modules are introduced using the `module` keyword:
 -->
-PureScriptの全てのコードはモジュールに含まれます。モジュールは`module`キーワードによってu導入されます：
+PureScriptの全てのコードはモジュールに含まれます。モジュールは`module`キーワードによって導入されます：
 
 ```purescript
 module A where
