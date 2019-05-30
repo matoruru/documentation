@@ -133,7 +133,10 @@ Because "run" is a rather non-descript name, without knowing the type of a `run`
 -->
 "run"はどこにでもありそうな名前なので、読む前にその関数の型を知らなければ、そのモジュールが`MyWebFramework`であると知るまでは`run`関数が何をするためのものなのかが不明確です。次の人がこのコードを読んだときの混乱を軽減するために、`MyWebFramework.run`のように修飾付きでインポートして使用することができます。
 
+<!--
 ### Avoiding naming conflicts
+-->
+### 命名衝突の回避
 
 ```purescript
 module Main where
@@ -145,16 +148,29 @@ null = ...
 test = Array.null [1, 2, 3]
 ```
 
+<!--
 Here, the name ``null`` would ordinarily conflict with ``null`` from ``Data.Array``, but the qualified import solves this problem. ``Data.Array.null`` can be referenced using ``Array.null`` instead.
+-->
+ここで、名前``null``は``Data.Array``の``null``と衝突していましたが、修飾インポートがこれを解決します。``Array.null``を使って``Data.Array.null``を参照することができます。
 
+<!--
 Operators can also be referenced this way:
+-->
+演算子も同じようにして参照することが可能です：
+
 ```purescript
 test' = Array.null ([1, 2, 3] Array.\\ [1, 2, 3])
 ```
 
+<!--
 ### Merging modules
+-->
+### モジュールの統合
 
+<!--
 Modules can be merged under the same name using qualified imports. If merging multiple modules, consider using explicit imports to avoid conflicts, in case modules would want to import the same name:
+-->
+修飾インポートで同じ名前を用いることでモジュール同士を統合することができます。複数のモジュールをマージするときは、衝突を避けるために明示インポートの使用を考えてください：
 
 ```purescript
 module Main where
@@ -166,9 +182,15 @@ import Data.String.Regex.Unsafe (unsafeRegex) as Re
 split = Re.split (Re.unsafeRegex "[,;:.]\\s+" Re.global)
 ```
 
+<!--
 ## Module Exports
+-->
+## モジュールの公開
 
+<!--
 You can control what gets exported from a module by using an export list. When an export list is used, other modules will only be able to see things which are in the export list. For example:
+-->
+そのモジュールから何を公開するのかについて、公開リストを使用して制御できます。公開リストが使用された時、外部から見えるのは公開リストに含まれたもののみになります。例えば：
 
 ```purescript
 module A (exported) where
@@ -180,11 +202,20 @@ notExported :: Int -> Int
 notExported = [...]
 ```
 
+<!--
 In this case, modules importing `A` will not be able to see the `notExported` function.
+-->
+この場合、モジュール`A`をインポートしても`notExported`関数は見えません。
 
+<!--
 The types of names which can be exported is the same as for module imports.
+-->
+公開できる名前の種類はモジュールのインポートの場合と同じです。
 
+<!--
 Imported modules can be re-exported in their entirety:
+-->
+インポートされたモジュールは全体を再公開することができます：
 
 ```purescript
 module A (module B) where
@@ -192,7 +223,10 @@ module A (module B) where
 import B
 ```
 
+<!--
 Qualified and explicit imports can be used also:
+-->
+修飾・明示インポートも可能です：
 
 ```purescript
 module A (module MoreExports) where
@@ -201,7 +235,10 @@ import A.Util (useful, usefulFn) as MoreExports
 import A.Type (ADatatype(..)) as MoreExports
 ```
 
+<!--
 When re-exporting other modules, all local values and types can also be exported by specifying the module itself as an export:
+-->
+他のモジュールを再公開している時、自モジュールも公開リストに含めることで、全ての値や型も公開することができます：
 
 ```purescript
 module A (module A, module B) where
@@ -211,11 +248,20 @@ import B
 data ...
 ```
 
+<!--
 ### Exporting type classes
+-->
+### 型クラスの公開
 
+<!--
 To export a type class, simply add it to the list, together with all of its members. Unfortunately there is no short-hand for exporting all type class members in one go.
+-->
+型クラスを公開するためには、単に型クラスとそのメンバをリストに含めます。残念ながら、型クラスのメンバ全てを一度に公開するようなショートハンドはありません。
 
+<!--
 For example, suppose we have the following:
+-->
+例として、以下を考えます：
 
 ```purescript
 class Foldable f where
@@ -224,10 +270,16 @@ class Foldable f where
   foldMap :: forall a m. (Monoid m) => (a -> m) -> (f a) -> m
 ```
 
+<!--
 Then you can export the class with:
+-->
+このとき、以下のようにして型クラスを公開します：
 
 ```purescript
 module Test (class Foldable, foldr, foldl, foldMap) where
 ```
 
+<!--
 If a type class is exported, then all of its members must also be exported. Likewise, if a type class member is exported, the type class it belongs to must also be exported.
+-->
+型クラスが公開される時には、その全てのメンバも公開されなければなりません。同様に、型クラスのメンバが公開されるときには、それが属する型クラスも公開されなければなりません。
