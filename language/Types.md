@@ -23,7 +23,7 @@ The type system defines the following types:
 - 原始型: `Int`, `Number`, `String`, `Char`, `Boolean`
 - 配列
 - レコード
-- タグ付き共用体
+- 代数的データ型(タグ付き共用体)
 - ユーザ定義型
 - 関数
 - 多相型
@@ -74,17 +74,17 @@ PureScriptのレコードはJavaScriptのオブジェクトに対応していま
 <!--
 ## Tagged Unions
 -->
-## タグ付き共用体
+## 代数的データ型(タグ付き共用体)
 
 <!--
 Tagged unions consist of one or more constructors, each of which takes zero or more arguments.
 -->
-タグ付き共用体は1つ以上のコンストラクタから構成されます。各コンストラクタは0個以上の引数を取ります。
+代数的データ型は1つ以上のコンストラクタから構成されます。各コンストラクタは0個以上の引数を取ります。
 
 <!--
 Tagged unions can only be created using their constructors, and deconstructed through pattern matching (a more thorough treatment of pattern matching will be provided later).
 -->
-タグ付き共用体はコンストラクタからのみ作成され、パターンマッチによって解体されます（さらに徹底的なパターンマッチの方法については後に提示します）。
+代数的データ型はコンストラクタからのみ作成され、パターンマッチによって解体されます（さらに徹底的なパターンマッチの方法については後に提示します）。
 
 <!--
 For example:
@@ -106,12 +106,12 @@ main = do
 <!--
 In the example, Foo is a tagged union type which has two constructors. Its first constructor `Foo` takes no arguments, and its second `Bar` takes one, which must be a String.
 -->
-上記の例で、Fooは2つのコンストラクタを持つタグ付き共用体です。1つ目のコンストラクタ`Foo`は引数を取らず、2つ目のコンストラクタ`Bar`はString型の引数を1つ取ります。
+上記の例で、Fooは2つのコンストラクタを持つ代数的データ型です。1つ目のコンストラクタ`Foo`は引数を取らず、2つ目のコンストラクタ`Bar`はString型の引数を1つ取ります。
 
 <!--
 `runFoo` is an example of pattern matching on a tagged union type to discover its constructor, and the last two lines show how to construct values of type `Foo`.
 -->
-`runFoo`はタグ付き共用体のコンストラクタを発見する例になっています。また、最後の2行で`Foo`型の値を作成しています。
+`runFoo`は代数的データ型のコンストラクタを発見する例になっています。また、最後の2行で`Foo`型の値を作成しています。
 
 <!--
 ## Newtypes
