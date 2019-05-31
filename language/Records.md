@@ -1,6 +1,12 @@
+<!--
 # Records
+-->
+# レコード
 
+<!--
 Record literals are surrounded by braces, as in JavaScript:
+-->
+レコードリテラルはJavaScriptのように波括弧で囲みます：
 
 ```purescript
 author :: { name :: String, interests :: Array String }
@@ -10,7 +16,10 @@ author =
     }
 ```
 
+<!--
 Fields of records can be accessed using a dot, followed by the label of the field to access:
+-->
+レコードのフィールドには、ドットの後にフィールドのラベルを続けることでアクセスできます：
 
 ```purescript
 > author.name
@@ -20,13 +29,25 @@ Fields of records can be accessed using a dot, followed by the label of the fiel
 ["Functional Programming","JavaScript"]
 ```
 
+<!--
 ## Kinds
+-->
+## 種
 
+<!--
 `{ ... }` is just syntactic sugar for the `Record` type constructor, so `{ language ::  String }` is the same as `Record ( language :: String )`.
+-->
+`{ ... }`は単なる`Record`型コンストラクタの糖衣構文なので、`{ language ::  String }`は`Record ( language :: String )`と同じです。
 
+<!--
 The Record type constructor is parameterized by a row of types. In kind notation, `Record` has kind `# Type -> Type`. That is, it takes a row of types to a type.
+-->
+レコード型コンストラクタは型の列によってパラメータ化されています。型注釈では、`Record`は種`# Type -> Type`を持っています。これは型の列を取って型にするということです。
 
+<!--
 `( language :: String )` denotes a row of types (something of kind `# Type`), so it can be passed to `Record` to construct a type, namely `Record ( language :: String )`.
+-->
+`( language :: String )`は型の列(`# Type`など)を表すので、型を構築するために`Record`を通します。すなわち、`Record ( language :: String )`です。
 
 ## Extending Records
 
