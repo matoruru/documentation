@@ -67,7 +67,7 @@ Module imports and exports are fully documented on the [Modules](Modules.md) pag
 <!--
 ### Explicit forall
 -->
-明示的な全称量化
+### 明示的な全称量化
 
 <!--
 Polymorphic functions in PureScript require an explicit `forall` to declare type variables before using them. For example, Haskell's list `length` function is declared like this:
