@@ -362,7 +362,7 @@ PureScriptはタプルのための特別な構文を持ちません。レコー�
 <!--
 A `Tuple` type for 2-tuples is available via the [purescript-tuples](https://github.com/purescript/purescript-tuples) library. `Tuple` is treated the same as any other type or data constructor.
 -->
-2-組の`タプル`型は[purescript-tuples](https://github.com/purescript/purescript-tuples)ライブラリから使用可能です。`タプル`は他の型やデータコンストラクタと同様に扱えます。
+2-組の`Tuple`型は[purescript-tuples](https://github.com/purescript/purescript-tuples)ライブラリから使用可能です。`Tuple`は他の型やデータコンストラクタと同様に扱えます。
 
 <!--
 ## Composition operator
@@ -413,55 +413,93 @@ factors n = do
   pure $ Tuple a b
 ```
 
+<!--
 ## No special treatment of `$`
+-->
+## `$`の特別扱いがない
 
+<!--
 GHC provides a special typing rule for the `$` operator, so that the following natural application to the rank-2 `runST` function is well-typed:
+-->
+GHCは`$`演算子のための特別な型付け規則を提供するため、以下のランク2`runST`への自然な適用は関数を正しく型付けされています。 
 
 ```haskell
 runST $ do
   ...
 ```
 
+<!--
 PureScript does not provide this rule, so it is necessary to either 
+-->
+PureScriptはこの規則を提供しないので、どちらかが必要です
 
+<!--
 - omit the operator: `runST do ...`
 - or use parentheses instead: `runST (do ...)`
+-->
+- 演算子を省略する： `runST do ...`
+- 代わりに丸括弧を使用する `runST (do ...)`
 
+<!--
 ## Defining Operators
+-->
+## 演算子の定義
 
+<!--
 In Haskell, it is possible to define an operator with the following natural syntax:
+-->
+Haskellでは、次の自然な構文によって演算子の定義が可能です：
 
 ```haskell
 f $ x = f x
 ```
 
+<!--
 In PureScript, you provide an operator alias for a named function. Defining functions using operators is removed since version 0.9.
+-->
+PureScriptでは、名前を持つ関数の別名として演算子を提供します。演算子を使用した関数の定義はバージョン0.9で削除されました。
 
 ```purescript
 apply f x = f x
 infixr 0 apply as $
 ```
 
+<!--
 ## Operator Sections
+-->
+## 演算子セクション
 
+<!--
 In Haskell, there is syntactic sugar to partially apply infix operators.
+-->
+Haskellでは、中置演算子の部分適用のために糖衣構文があります。
 
 ```haskell
 (2 ^) -- desugars to `(^) 2`, or `\x -> 2 ^ x`
 (^ 2) -- desugars to `flip (^) 2`, or `\x -> x ^ 2`
 ```
 
+<!--
 In PureScript, operator sections look a little bit different.
+-->
+PureScriptでは、演算子セクションが少し異なります。
 
 ```purescript
 (2 ^ _)
 (_ ^ 2)
 ```
 
+<!--
 ## Extensions
+-->
+## 拡張
 
+<!--
 The PureScript compiler does not support GHC-like language extensions. However, there are some "built-in" language features that are equivalent (or at least similar) to a number of GHC extensions. These currently are:
+-->
+PureScriptコンパイラはGHCのような言語拡張をサポートしません。しかし、GHC拡張と同様の（少なくとも似ている）いくつかの「組み込み」言語機能があります。現在は次のものがあります：
 
+<!--
 * DataKinds (see note below)
 * EmptyDataDecls
 * ExplicitForAll
@@ -474,25 +512,66 @@ The PureScript compiler does not support GHC-like language extensions. However, 
 * RankNTypes
 * RebindableSyntax
 * ScopedTypeVariables
+-->
+* DataKinds (以下の注意事項を見てください)
+* EmptyDataDecls
+* ExplicitForAll
+* FlexibleContexts
+* FlexibleInstances
+* FunctionalDependencies
+* KindSignatures
+* MultiParamTypeClasses
+* PartialTypeSignatures
+* RankNTypes
+* RebindableSyntax
+* ScopedTypeVariables
 
+<!--
 Note on `DataKinds`: Unlike in Haskell, user-defined kinds are open, and they are not promoted, which means that their constructors can only be used in types, and not in values. For more information about the kind system, see https://github.com/purescript/documentation/blob/master/language/Types.md#kind-system
+-->
+※`DataKinds`の注意事項：Haskellとは異なり、ユーザ定義種は元から使えますが、推奨されていません。これは、これらのコンストラクタが型レベルでのみ使用可能であることを意味します。詳しくは[種システム](https://github.com/purescript/documentation/blob/master/language/Types.md#kind-system)を参照してください。
 
+<!--
 ## `error` and `undefined`
+-->
+## `エラー`と`未定義`
 
+<!--
 For `error`, you can use `Effect.Exception.Unsafe.unsafeThrow`, in the `purescript-exceptions` package.
+-->
+`error`のために、`purescript-exceptions`パッケージの`Effect.Exception.Unsafe.unsafeThrow`を使えます。
 
+<!--
 `undefined` can be emulated with `Unsafe.Coerce.unsafeCoerce unit :: forall a. a`, which is in the `purescript-unsafe-coerce` package. See also https://github.com/purescript/purescript-prelude/issues/44.
+-->
+`undefined`は、`purescript-unsafe-coerce`パッケージの`Unsafe.Coerce.unsafeCoerce unit :: forall a. a`で模倣できます。https://github.com/purescript/purescript-prelude/issues/44 も見てください。
 
+<!--
 Although note that these might have different behaviour to the Haskell versions due to PureScript's strictness.
+-->
+しかし、PureScriptの正格性によってHaskellの場合とは異なる振る舞いをする可能性に注意してください。
 
+<!--
 ## Documentation comments
+-->
+## 文書化コメント
 
+<!--
 When writing documentation, the pipe character `|` must appear at the start of every comment line, not just the first. See [the documentation for doc-comments](Syntax.md#comments) for more details.
+-->
+ドキュメントを書いている時には、全コメント行の先頭にパイプ文字`|`を書く必要があります。詳しくは[文書化コメントのための文書](Syntax.md#comments)を参照してください。
 
+<!--
 ## Where is ... from Haskell?
+-->
+## Haskellの○○はどこにある？
 
+<!--
 As PureScript has not inherited Haskell's legacy code, some operators and functions that are common in Haskell have different names in PureScript:
+-->
+PureScriptはHaskellのレガシーコードを引き継いでいないので、いくつかの演算子や関数は異なる名前を持っています。
 
+<!--
 - `(>>)` is `(*>)`, as `Apply` is a superclass of `Monad` so there is no need to have an `Monad`-specialised version.
 - Since 0.9.1, the `Prelude` library does not contain `(++)` as a second alias for `append` / `(<>)` (`mappend` in Haskell) anymore.
 - `mapM` is `traverse`, as this is a more general form that applies to any traversable structure, not just lists. Also it only requires `Applicative` rather than `Monad`. Similarly, `liftM` is `map`.
@@ -500,3 +579,11 @@ As PureScript has not inherited Haskell's legacy code, some operators and functi
 - `some` and `many` are defined with the type of list they operate on (`Data.Array` or `Data.List`).
 - Instead of `_foo` for typed holes, use `?foo`. You have to name the hole; `?` is not allowed.
 - Ranges are written as `1..2` rather than `[1..2]`. There's a difference, though: in Haskell `[2..1]` is an empty list, whereas in PureScript `2..1` is `[2,1]`
+-->
+- `(>>)`は`(*>)`です。`Apply`は`Monad`のスーパークラスなので、`Monad`に特化する必要がないからです。
+- 0.9.1以来、`Prelude`ライブラリは`append`／`(<>)`(Haskellの`mappend`)の別名の別名である`(++)`を含んでいません。
+- `mapM`は`traverse`です。これはリストだけでない任意の一筆書き可能な構造に適用されるより一般的な形です。これは`Monad`ではなく`Applicative`のみを必要とします。ほぼ同様に、`liftM`は`map`です。
+- Haskellの`Data.List`にある多くの関数は、より一般的な形で`Data.Foldable`または`Data.Traversable`から提供されます。
+- `some`と`many`は、それらが操作する型のリストと共に`Data.Array`または`Data.List`で定義されています。
+- 型付き穴には`_foo`の代わりに`?foo`を使います。穴には名前が必要で、`?`は許されません。
+- レンジは`[1..2]`ではなく`1..2`と書かれます。Haskellの`[2..1]`は空リストですが、PureScriptの`2..1`は`[2,1]`になるという違いがあります。
