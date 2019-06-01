@@ -582,7 +582,7 @@ PureScriptはHaskellのレガシーコードを引き継いでいないので、
 -->
 - `(>>)`は`(*>)`です。`Apply`は`Monad`のスーパークラスなので、`Monad`に特化する必要がないからです。
 - 0.9.1以来、`Prelude`ライブラリは`append`／`(<>)`(Haskellの`mappend`)の別名の別名である`(++)`を含んでいません。
-- `mapM`は`traverse`です。これはリストだけでない任意の一筆書き可能な構造に適用されるより一般的な形です。これは`Monad`ではなく`Applicative`のみを必要とします。ほぼ同様に、`liftM`は`map`です。
+- `mapM`は`traverse`です。これはリストだけでない任意の一筆書き可能な構造に適用されるより一般的な形で、`Monad`ではなく`Applicative`のみを必要とします。同様に、`liftM`は`map`です。
 - Haskellの`Data.List`にある多くの関数は、より一般的な形で`Data.Foldable`または`Data.Traversable`から提供されます。
 - `some`と`many`は、それらが操作する型のリストと共に`Data.Array`または`Data.List`で定義されています。
 - 型付き穴には`_foo`の代わりに`?foo`を使います。穴には名前が必要で、`?`は許されません。
