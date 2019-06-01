@@ -156,7 +156,7 @@ x :: Point -> Number
 y :: Point -> Number
 ```
 
-<!!--
+<!--
 However in PureScript this only introduces a `Point` constructor that accepts an object type. In fact, often we might not need a data constructor at all when using object types:
 -->
 しかしPureScriptで導入されるのは、オブジェクト型を受け入れる`Point`コンストラクタだけです。実際、オブジェクト型を使うときにはデータコンストラクタを必要としないことがよくあります：
