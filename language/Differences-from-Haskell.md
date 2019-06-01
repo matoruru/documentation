@@ -1,20 +1,47 @@
+<!--
 ## Evaluation strategy
+-->
+## 評価戦略
 
+<!--
 Unlike Haskell, PureScript is strictly evaluated.
+-->
+Haskellとは異なり、PureScriptは正格評価です。
 
+<!--
 As the evaluation strategy matches JavaScript, interoperability with existing code is trivial - a function exported from a PureScript module behaves exactly like any "normal" JavaScript function, and correspondingly, calling JavaScript via the FFI is simple too.
+-->
+JavaScriptに合わせた評価戦略になっています。既存のコードとの相互運用性は些細なものであり、PureScriptのモジュールから生成された関数はJavaScriptの「普通の」関数と正確に同じように振る舞います。同様に、FFIを通じてJavaScriptを呼び出すことも単純です。
 
+<!--
 Keeping strict evaluation also means there is no need for a runtime system or overly complicated JavaScript output. It should also be possible to write higher performance code when needed, as introducing laziness on top of JavaScript comes with an unavoidable overhead.
+-->
+正格評価を保つことは、実行時システムや過度に複雑なJavaScriptコードを必要としないことも意味します。必要なときには高いパフォーマンスのコードを書くこともできるべきであり、JavaScriptの上に遅延を導入することは避けられないオーバーヘッドを招くことになります。
 
+<!--
 ## Prelude/base
+-->
+## Prelude／base
 
+<!--
 There is no implicit `Prelude` import in PureScript, the `Prelude` module is just like any other. Also, no libraries are distributed with the compiler at all.
+-->
+PureScriptでは`Prelude`を他のライブラリと同様に扱い、暗黙的なインポートを行いません。また、コンパイラと共に配布されるライブラリはありません。
 
+<!--
 The generally accepted "standard" `Prelude` is the [`purescript-prelude`](https://github.com/purescript/purescript-prelude) library.
+-->
+一般に受け入れられている「標準の」`Prelude`ライブラリは[`purescript-prelude`](https://github.com/purescript/purescript-prelude)です。
 
+<!--
 ## Module Imports / Exports
+-->
+## モジュールのインポート／公開
 
+<!--
 Type classes in modules must be specifically imported using the `class` keyword.
+-->
+モジュール内の型クラスは`class`キーワードと共に明示的にインポートされる必要があります。
 
 ```purescript
 module B where
@@ -22,27 +49,48 @@ module B where
 import A (class Fab)
 ```
 
+<!--
 There is no `qualified` keyword in PureScript. Writing `import Data.List as List` has the same effect as writing `import qualified Data.List as List` in Haskell.
+-->
+PureScriptには`qualified`キーワードがありません。単に`import Data.List as List`と書くことで、Haskellの`import qualified Data.List as List`と同様の効果を持ちます。
 
+<!--
 Module imports and exports are fully documented on the [Modules](Modules.md) page.
+-->
+モジュールのインポートと公開については[Modules](Modules.md)で完全にドキュメント化されています。
 
+<!--
 ## Types
+-->
+## 型
 
+<!--
 ### Explicit forall
+-->
+明示的な全称量化
 
+<!--
 Polymorphic functions in PureScript require an explicit `forall` to declare type variables before using them. For example, Haskell's list `length` function is declared like this:
+-->
+PureScriptの多相関数は、型変数の使用前宣言のために明示的な`forall`を必要とします。例えば、Haskellのリストの`length`関数は次のように宣言されています：
 
 ``` haskell
 length :: [a] -> Int
 ```
 
+<!--
 In PureScript this will fail with the error `Type variable a is undefined`. The PureScript equivalent is:
+-->
+PureScriptでは、これは`Type variable a is undefined`エラーによって失敗するため、次のように書く必要があります：
 
 ``` purescript
 length :: forall a. Array a -> Int
 ```
 
+<!--
 A `forall` can declare multiple type variables at once, and should appear before typeclass constraints:
+-->
+`forall`は複数の型変数を一度に宣言することができます。また、型クラス制約の前に記述する必要があります：
 
 ``` purescript
 ap :: forall m a b. (Monad m) => m (a -> b) -> m a -> m b
