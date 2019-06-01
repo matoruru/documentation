@@ -96,29 +96,59 @@ A `forall` can declare multiple type variables at once, and should appear before
 ap :: forall m a b. (Monad m) => m (a -> b) -> m a -> m b
 ```
 
+<!--
 ### Numbers
+-->
+### 数値
 
+<!--
 There is a native `Number` type which represents JavaScript's standard IEEE 754 float and an `Int` which is restricted to the range of 32-bit integers. In JavaScript, the `Int` values and operations are generated with a `|0` postfix to achieve this, e.g. if you have variables `x`, `y`, and `z` of type `Int`, then the PureScript expression `(x + y) * z` would compile to `((x + y)|0 * z)|0`.
+-->
+JavaScriptの標準であるIEEE 754単精度浮動小数点数を表す`Number`型と、32ビットに制限された整数の`Int`があります。JavaScriptでは、これを達成するために`Int`値と演算子は接尾辞`|0`によって生成されます。例えば、`Int`型の変数`x`、`y`、`z`があるとき、PureScriptの式`(x + y) * z`は`((x + y)|0 * z)|0`にコンパイルされます。
 
+<!--
 ### Unit
+-->
+### ユニット
 
+<!--
 PureScript has a type `Unit` used in place of Haskell's `()`. The `Prelude` module provides a value `unit` that inhabits this type.
+-->
+PureScriptにはHaskellの`()`に対応する`Unit`型があります。`Prelude`モジュールがその型を持つ値`unit`を提供しています
 
+<!--
+### `[a]`
+-->
 ### `[a]`
 
+<!--
 PureScript does not provide syntactic sugar for list types. Construct list types using `List` from `Data.List`.
+-->
+PureScriptはリスト型の糖衣構文を提供しません。リストは`Data.List`にある`List`を用いて生成されます。
 
+<!--
 There is also an `Array` type for native JavaScript arrays, but this does not have the same performance characteristics as `List`. `Array` _values_ can be constructed with `[x, y, z]` literals, but the type still needs to be annotated as `Array a`.
+-->
+JavaScriptの配列のために`Array`型もありますが、これは`List`と同じパフォーマンス特性を持ちません。`Array`*値*は`[x, y, z]`リテラルとして生成できますが、型の場合は注釈として`Array a`が必要になります。
 
+<!--
 ## Records
+-->
+## レコード
 
+<!--
 PureScript can encode JavaScript-style objects directly by using row types, so Haskell-style record definitions actually have quite a different meaning in PureScript:
+-->
+PureScriptは列型を用いてJavaScriptスタイルのオブジェクトを直接エンコードできるので、Haskellスタイルのレコード定義が全く異なる意味を持ちます。
 
 ``` purescript
 data Point = Point { x :: Number, y :: Number }
 ```
 
+<!--
 In Haskell a definition like this would introduce several things to the current environment:
+-->
+このようなHaskellの定義は現在の環境にいくつかのことを導入します：
 
 ``` haskell
 Point :: Number -> Number -> Point
@@ -126,81 +156,129 @@ x :: Point -> Number
 y :: Point -> Number
 ```
 
+<!!--
 However in PureScript this only introduces a `Point` constructor that accepts an object type. In fact, often we might not need a data constructor at all when using object types:
+-->
+しかしPureScriptで導入されるのは、オブジェクト型を受け入れる`Point`コンストラクタだけです。実際、オブジェクト型を使うときにはデータコンストラクタを必要としないことがよくあります：
 
 ``` purescript
 type PointRec = { x :: Number, y :: Number }
 ```
 
+<!--
 Objects are constructed with syntax similar to that of JavaScript (and the type definition):
+-->
+オブジェクトとオブジェクト型の定義はJavaScriptのそれと似た構文で構成されます：
 
 ``` purescript
 origin :: PointRec 
 origin = { x: 0, y: 0 }
 ```
 
+<!--
 And instead of introducing `x` and `y` accessor functions, `x` and `y` can be read like JavaScript properties:
+-->
+また、`x`、`y`のアクセサ関数を導入する代わりに、`x`、`y`はJavaScriptのプロパティのようにアクセスできます：
 
 ``` purescript
 originX :: Number
 originX  = origin.x
 ```
 
+<!--
 PureScript also provides a record update syntax similar to Haskell's:
+-->
+PureScriptはHaskellと似たレコード更新の構文も提供します：
 
 ``` purescript
 setX :: Number -> PointRec -> PointRec 
 setX val point = point { x = val }
 ```
 
+<!--
 A common mistake to look out for is when writing a function that accepts a data type like the original `Point` above—the object is still wrapped inside `Point`, so something like this will fail:
+-->
+気を付けるべきよくある間違いは、上記の`Point`のようなデータ型を受け入れる関数を書くときに起こります。そのオブジェクトはまだ`Point`の内側にあるので、次のようにすると失敗します：
 
 ``` purescript
 showPoint :: Point -> String
 showPoint p = show p.x <> ", " <> show p.y
 ```
 
+<!--
 Instead, we need to destructure `Point` to get at the object:
+-->
+代わりに、`Point`型を分解してオブジェクトを得るようにします：
 
 ``` purescript
 showPoint :: Point -> String
 showPoint (Point obj) = show obj.x <> ", " <> show obj.y
 ```
 
+<!--
 ## Type classes
+-->
+## 型クラス
 
+<!--
 ### Arrow direction
+-->
+### 矢印の向き
 
+<!--
 When declaring a type class with a superclass, the arrow is the other way around. For example:
+-->
+スーパークラスと共に型クラスを宣言している時、矢印は逆向きになります。例えば：
 
 ```purescript
 class (Eq a) <= Ord a where
   ...
 ```
 
+<!--
 This is so that `=>` can always be read as logical implication; in the above case, an `Ord a` instance _implies_ an `Eq a` instance.
+-->
+これは`=>`を常に論理包含として読むことができるようにするためで、上記の場合、`Ord a`インスタンスは`Eq a`インスタンスを*意味します*。
 
+<!--
 ### Named instances
+-->
+### 名前付きインスタンス
 
+<!--
 In PureScript, instances must be given names:
+-->
+PureScriptでは、インスタンスは名前を持つ必要があります：
 
 ```purescript
 instance arbitraryUnit :: Arbitrary Unit where
   ...
 ```
 
+<!--
 Overlapping instances are still disallowed, like in Haskell. The instance names are used to help the readability of compiled JavaScript.
+-->
+Haskellのようにインスタンスの重複は許されていません。インスタンス名はコンパイル後のJavaScriptの可読性を向上するために使用されます。
 
+<!--
 ### Deriving
+-->
+### 導出
 
+<!--
 Unlike Haskell, PureScript doesn't have deriving functionality when declaring
 data types.  For example, the following code does not work in PureScript:
+-->
+Haskellとは異なり、PureScriptはデータ型の宣言時に導出を行うことができません。例えば、次のようなコードは動きません：
 
 ```haskell
 data Foo = Foo Int String deriving (Eq, Ord)
 ```
 
+<!--
 However, PureScript does have `StandaloneDeriving`-type functionality:
+-->
+しかし、PureScriptは`StandaloneDeriving`機能を持ちます：
 
 ```purescript
 data Foo = Foo Int String
@@ -209,55 +287,117 @@ derive instance eqFoo :: Eq Foo
 derive instance ordFoo :: Ord Foo
 ```
 
+<!--
 Examples of type classes that can be derived this way include `Eq`, `Functor`,
 and `Ord`.  See
 [here](https://github.com/purescript/documentation/blob/master/language/Type-Classes.md#type-class-deriving)
 for a list of other type classes.
+-->
+この方法で導出される型クラスの例は、`Eq`、`Functor`、`Ord`です。その他の型クラスの一覧は[こちら](https://github.com/purescript/documentation/blob/master/language/Type-Classes.md#type-class-deriving)を参照してください。
 
+<!--
 Using generics, it is also possible to use generic implementations for type
 classes like `Bounded`, `Monoid`, and `Show`.  See
 [the generics-rep library](https://pursuit.purescript.org/packages/purescript-generics-rep)
 for a list of other type classes that have generic implementations, as well as
 an explanation of how to write generic implementations for your own type
 classes.
+-->
+`Bounded`、`Monoid`、`Show`のような型クラスのために、総称を使って一般的な実装を行うことも可能です。一般的な実装を持つ他の型クラスの一覧は[generics-repライブラリ](https://pursuit.purescript.org/packages/purescript-generics-rep)を参照してください。一般的な実装を持つ型クラスを書く方法も説明されています。
 
+<!--
 ### Orphan Instances
+-->
+### 孤児インスタンス
 
+<!--
 Unlike Haskell, orphan instances are completely disallowed in PureScript.  It is a compiler error to try to declare orphan instances.
+-->
+Haskellとは異なり、PureScriptでは孤児インスタンスを完全に禁止しています。孤児インスタンスを宣言しようとするとコンパイラエラーになります。
 
+<!--
 When instances cannot be declared in the same module, one way to work around it is to use [newtype wrappers](http://stackoverflow.com/questions/22080564/whats-the-practical-value-of-all-those-newtype-wrappers-in-data-monoid).
+-->
+インスタンスが同一モジュール内で宣言できない場合、これを回避する方法の一つは[ユーザ定義型ラッパ](http://stackoverflow.com/questions/22080564/whats-the-practical-value-of-all-those-newtype-wrappers-in-data-monoid)を使用することです。
 
+<!--
 ### Default members
+-->
+### デフォルトメンバ
 
+<!--
 At the moment, it is not possible to declare default member implementations for type classes. This may change in the future.
+-->
+現在、型クラスのデフォルトメンバ実装を宣言することはできません。今後可能になるかもしれません。
 
+<!--
 ### Type class hierarchies
+-->
+### 型クラスの階層
 
+<!--
 Many type class hierarchies are more granular than in Haskell. For example:
+-->
+多くの型クラスの階層はHaskellよりも細かくなっています。例えば：
 
+<!--
 * `Category` has a superclass `Semigroupoid` which provides `(<<<)`, and does not require an identity.
 * `Monoid` has a superclass `Semigroup`, which provides `(<>)`, and does not require an identity.
 * `Applicative` has a superclass `Apply`, which provides `(<*>)` and does not require an implementation for `pure`.
+-->
+* `Category`は`(<<<)`を提供するスーパークラス`Semigroupoid`を持ち、恒等関数を必要としません。
+* `Monoid`は`(<>)`を提供するスーパークラス`Semigroup`を持ち、恒等関数を必要としません。
+* `Applicative`は`(<*>)`を提供するスーパークラス`Apply`を持ち、`pure`の実装を必要としません。
 
+<!--
 ## Tuples
+-->
+## タプル(組)
 
+<!--
 PureScript has no special syntax for tuples as records can fulfill the same role that *n*-tuples do with the advantage of having more meaningful types and accessors.
+-->
+PureScriptはタプルのための特別な構文を持ちません。レコードがより意味のある型とアクセサを持つ利点によって*n*-組と同じ役割を果たすことができるためです。
 
+<!--
 A `Tuple` type for 2-tuples is available via the [purescript-tuples](https://github.com/purescript/purescript-tuples) library. `Tuple` is treated the same as any other type or data constructor.
+-->
+2-組の`タプル`型は[purescript-tuples](https://github.com/purescript/purescript-tuples)ライブラリから使用可能です。`タプル`は他の型やデータコンストラクタと同様に扱えます。
 
+<!--
 ## Composition operator
+-->
+## 合成演算子
 
+<!--
 PureScript uses `<<<` rather than `.` for right-to-left composition of functions. This is to avoid a syntactic ambiguity with `.` being used for property access and name qualification. There is also a corresponding `>>>` operator for left-to-right composition.
+-->
+PureScripteでは右から左への関数合成のために`.`ではなく`<<<`を使います。これは`.`がプロパティへのアクセサや修飾名のために使われていることによる文法的な曖昧さを避けるためです。左から右への合成のために`>>>`もあります。
 
+<!--
 The `<<<` operator is actually a more general morphism composition operator that applies to semigroupoids and categories, and the `Prelude` module provides a `Semigroupoid` instance for the `->` type, which gives us function composition.
+-->
+`<<<`演算子は実際には半群や圏にも適用されるより一般的な射合成演算子です。`Prelude`モジュールは`->`型のために`Semigroupoid`インスタンスを提供しており、これが関数合成にあたります。
 
+<!--
+## `return`
+-->
 ## `return`
 
+<!--
 In the past, PureScript used `return`. However, it is now removed and replaced with [`pure`](https://pursuit.purescript.org/packages/purescript-prelude/1.1.0/docs/Control.Applicative#v:pure). It was always an alias for `pure`, which means this change was implemented by simply removing the alias.
+-->
+PureScriptでは`return`を使っていた過去がありますが、現在は[`pure`](https://pursuit.purescript.org/packages/purescript-prelude/1.1.0/docs/Control.Applicative#v:pure)で置き換えられています。もともと`pure`の別名だったので、この置き換えは単に別名を削除したことで実装されました。
 
+<!--
 ## Array Comprehensions
+-->
+## 配列内包表記
 
+<!--
 PureScript does not provide special syntax for array comprehensions. Instead, use `do`-notation. The `guard` function from the `Control.MonadPlus` module in `purescript-control` can be used to filter results:
+-->
+PureScriptは配列の内包表記に特別な構文を提供しません。代わりに`do`記法を使ってください。`purescript-control`にある`Control.MonadPlus`モジュール内の`guard`関数はフィルタ結果のために使われます：
 
 ```purescript
 import Prelude (($), (*), (==), bind, pure)
