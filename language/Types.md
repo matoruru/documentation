@@ -340,6 +340,7 @@ For example:
 -->
 例えば：
 
+<!--
 ```purescript
 -- Create an alias for a record with two fields
 type Foo = { foo :: Number, bar :: Number }
@@ -374,6 +375,41 @@ type RandomConsoleEffects eff = ( random :: RANDOM, console :: CONSOLE | eff )
 -- This limits the Effects to just RANDOM and CONSOLE
 type RandomConsoleEffect = RandomConsoleEffects ()
 ```
+-->
+```purescript
+-- 2フィールドを持つレコードの別名を作成
+type Foo = { foo :: Number, bar :: Number }
+
+-- 2フィールドは数値なので、加算する
+addFoo :: Foo -> Number
+addFoo o = o.foo + o.bar
+
+-- 同じ形を持つ多相レコードの別名を作成
+type Bar a = { foo :: a, bar :: a }
+-- FooはBar Numberと等しい
+
+-- 任意のBarのフィールドを関数に適用
+combineBar :: forall a b. (a -> a -> b) -> Bar a -> b
+combineBar f o = f o.foo o.bar
+
+-- 複雑な関数型の別名を作成
+type Baz = Number -> Number -> Bar Number
+
+-- この関数は引数を2つ取り、2倍した値をレコードに入れて返す
+mkDoubledFoo :: Baz
+mkDoubledFoo foo bar = { foo: 2.0*foo, bar: 2.0*bar }
+
+-- 任意のFoo内の値を2倍するように前の関数を実装する
+-- (Bar NumberがFooと同じであることを思い出してください)
+doubleFoo :: Foo -> Foo
+doubleFoo = combineBar mkDoubledFoo
+
+-- 複雑な副作用の列の記述を楽にする型シノニムを定義
+-- これにより、副作用を列に追加することを受け入れます
+type RandomConsoleEffects eff = ( random :: RANDOM, console :: CONSOLE | eff )
+-- これは副作用をRANDOMとCONSOLEに制限します
+type RandomConsoleEffect = RandomConsoleEffects ()
+```
 
 <!--
 Unlike newtypes, type synonyms are merely aliases and cannot be distinguished from usages of their expansion. Because of this they cannot be used to declare a type class instance. For more see [``TypeSynonymInstance`` Error](../errors/TypeSynonymInstance.md#typesynonyminstance-error).
@@ -400,6 +436,7 @@ Most types can be inferred (not including Rank N Types and constrained types), b
 -->
 高階多相型と制約のある型を除いたほとんどの型は推論されますが、コロンを2つ用いた型注釈を任意で提供することができ、宣言として書くことも、式の後に書くこともできます。
 
+<!--
 ```purescript
 -- Defined in Data.Semiring
 one :: forall a. (Semiring a) => a
@@ -414,6 +451,23 @@ number1 = one :: Number -- same as number1 = 1.0
 semiring1 :: forall a. Semiring a => a
 semiring1 = one
 -- It can even be constrained by another type class
+equal1 = one :: forall a. Semiring a => Eq a => a
+```
+-->
+```purescript
+-- Data.Semiringで定義する
+one :: forall a. (Semiring a) => a
+
+-- Intはone = 1であるSemiringのインスタンスなので、oneはIntになれます
+int1 :: Int
+int1 = one -- int1 = 1と同じ
+-- もしくはNumberであっても、one = 1.0であるSemiringのインスタンスとして提供されます
+number1 = one :: Number -- number1 = 1.0と同じ
+-- また、この多相性を保つことができるので、任意のSemiringで動作します
+-- (型注釈がなければ、これはデフォルトです)
+semiring1 :: forall a. Semiring a => a
+semiring1 = one
+-- 他の型クラスの制約を設けることもできます
 equal1 = one :: forall a. Semiring a => Eq a => a
 ```
 
