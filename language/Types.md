@@ -194,7 +194,7 @@ identity x = x
 <!--
 Polymorphism is not limited to abstracting over types. Values may also be polymorphic in types with other kinds, such as rows or effects (see "[Kind System](#kind-system)").
 -->
-多相性は型の抽象化に制限がなく、値は種に関して多相になるかもしれません。例えば、列やモナドなどです（[Kind System](#kind-system)を参照してください。）。
+多相性は型の抽象化に制限がなく、値は種に関して多相になるかもしれません。例えば、列やモナドなどです（[種システム](#種システム)を参照してください。）。
 
 
 <!--
