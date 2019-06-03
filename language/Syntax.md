@@ -43,8 +43,13 @@ A single line comment starts with `--`:
 -->
 1行コメントは`--`で始まります：
 
+<!--
 ``` purescript
 -- This is a comment
+```
+-->
+``` purescript
+-- ここはコメントです
 ```
 
 <!--
@@ -52,10 +57,18 @@ Multi-line comments are enclosed in `{-` and `-}`:
 -->
 複数行コメントは`{-`と`-}`で囲みます：
 
+<!--
 ``` purescript
 {-
   Comment
   continued comment
+-}
+```
+-->
+``` purescript
+{-
+  コメント
+  ここもコメント
 -}
 ```
 
@@ -64,8 +77,16 @@ Comments that start with a pipe character, `|`, are considered documentation, an
 -->
 パイプ文字`|`で始まるコメントはドキュメントと見なされ、ドキュメント生成ツール`psc-docs`の出力とPursuitで見えるようになります。例をお見せします：
 
+<!--
 ``` purescript
 -- | `bool` performs case analysis for the `Boolean` data type, like an `if` statement.
+bool :: forall a. Boolean -> a -> a -> a
+bool true x _ = x
+bool false _ x = x
+```
+-->
+``` purescript
+-- | `bool`は`if`文のような`Boolean`データ型のケース分析を行います。
 bool :: forall a. Boolean -> a -> a -> a
 bool true x _ = x
 bool false _ x = x
@@ -76,13 +97,23 @@ Note that, unlike Haskell, every line which should be considered documentation m
 -->
 Haskellとは異なり、ドキュメントに含めるべき行は全てパイプ文字から始まらなければなりません。したがって以下のようなことが可能です：
 
-
+<!--
 ``` purescript
 -- | Sort an array based on its `Ord` instance.
 -- |
 -- | This implementation runs in `O(n^2)` time, where `n` is the length of the
 -- | input array.
 -- TODO: try to optimise this?
+sort :: forall a. (Ord a) => Array a -> Array a
+sort xs = [...]
+```
+-->
+``` purescript
+-- | `Ord`インスタンスから成る配列をソートします。
+-- |
+-- | この実装は`O(n^2)`時間で終了します。
+-- | nは配列の長さです。
+-- TODO: これを最適化しますか？
 sort :: forall a. (Ord a) => Array a -> Array a
 sort xs = [...]
 ```
@@ -586,6 +617,9 @@ results in a [NonAssociativeError](../errors/NonAssociativeError.md):
 ```
 Cannot parse an expression that uses multiple instances of the non-associative operator Data.Eq.(==).
 Use parentheses to resolve this ambiguity.
+
+(非結合演算子のインスタンスであるData.Eq.(==)を複数使用した式を解析できません。
+この曖昧さを解決するために丸括弧を使用してください。)
 ```
 
 <!--
@@ -655,6 +689,13 @@ Cannot parse an expression that uses operators of the same precedence but mixed 
   Data.Eq.(==) is infix
 
 Use parentheses to resolve this ambiguity.
+
+(優先順位が同等かつ結合性の混在する式を解析することはできません：
+
+  Data.Functor.(<$>)は左結合です
+  Data.Eq.(==)は非結合です
+
+この曖昧さを解決するために丸括弧を使用してください。)
 ```
 
 <!--
@@ -827,6 +868,7 @@ Indentation of a binding's body is significant. If defining multiple bindings, a
 -->
 束縛の本体は重要です。let-inブロックのように複数の束縛を定義するなら、各宣言の頭を同じ位置に揃える必要があります。束縛の定義の本体は、さらにインデントされていなければなりません。例えば：
 
+<!--
 ``` purescript
 f =
   -- The `let-in` block starts at an indentation of 2 spaces, so
@@ -851,6 +893,34 @@ f =
           x (y 1)
         n =
             -- This body is indented 4 spaces.
+            x 1
+    log "test"
+```
+-->
+``` purescript
+f =
+  -- `let-in`ブロックは2スペースによる字下げから始まるので、
+  --   この束縛は2以上の字下げから始まらなければなりません。
+  let
+    -- `x`は4スペースで字下げされているため、`y`も4スペースで字下げされなければなりません。
+    -- その本体は4以上のスペースで字下げされる必要があります。
+    x :: Int -> Int
+    x a =
+      -- この本体は2スペースで字下げされています。
+      a
+    y :: Int -> Int
+    y c =
+        -- この本体は4スペースで字下げされています。
+        c
+  in do
+    -- `m`は`let`の始まりから数えて4スペースで字下げされているので、
+    --   `n`も4スペースで字下げされなければなりません。
+    -- その本体は4以上のスペースで字下げされる必要があります。
+    let m =
+          -- この本体は2スペースで字下げされています。
+          x (y 1)
+        n =
+            -- この本体は4スペースで字下げされています。
             x 1
     log "test"
 ```
