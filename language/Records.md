@@ -151,8 +151,15 @@ If compiling to JavaScript, consider that the PureScript compiler will allow you
 -->
 JavaScriptにコンパイルされる場合、JavaScriptで特別な意味を持つシンボルも許可されることを考慮してください。例えば`__proto__`などです。
 
+<!--
 ```purescript
 oops = {__proto__: unsafeCoerce ""}.__proto__.constructor.constructor "alert('lol')" 0
 -- When loaded onto a web page, this will display "lol" in a browser dialog box,
 --   which is an effectful behavior despite this expression appearing to be pure.
+```
+-->
+```purescript
+oops = {__proto__: unsafeCoerce ""}.__proto__.constructor.constructor "alert('lol')" 0
+-- ウェブページに読み込まれた時、"lol"をブラウザのダイアログボックスに表示します。
+--   これは副作用を生む振る舞いにも関わらず、この式は純粋に見えます。
 ```
