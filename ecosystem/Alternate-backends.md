@@ -1,13 +1,22 @@
+<!--
 There are various alternatives to `psc`'s default JavaScript backend:
+-->
+`psc`のデフォルトのJavaScriptには様々な代替バックエンドが存在します：
 
+<!--
 ## Actively Maintained
+-->
+## 活発にメンテナンスされているもの
 
 | source code                                                                           | PS version | Target        | status   | comments               | 
 |:--------------------------------------------------------------------------------------|:-----------|:--------------|:------|:-----------------------|
 | [andyarvanitis/purescript-native](https://github.com/andyarvanitis/purescript-native)             | 0.12.x    | C++11         | active | all tests in `./examples/passing` are passing |
 | [purerl/purescript](https://github.com/purerl/purescript) | 0.12.0 | Erlang | active |
 
+<!--
 ## Alpha Quality
+-->
+## アルファ版
 
 | source code                                                                             | PS version | Target        | 
 |:----------------------------------------------------------------------------------------|:-----------|:--------------|
@@ -16,7 +25,10 @@ There are various alternatives to `psc`'s default JavaScript backend:
 | [epost/psc-query](https://github.com/epost/psc-query)                                   | 0.11.7     | Datalog       |
 | [tfausak/thran](https://github.com/tfausak/thran)                                       | 0.11.6     | Haskell (GHC) |
 
+<!--
 ## Stale
+-->
+## 古いもの
 
 | source code                                                                           | PS version | Target        |
 |:--------------------------------------------------------------------------------------|:-----------|:--------------|
