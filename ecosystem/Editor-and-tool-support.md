@@ -101,5 +101,4 @@ Spacemacsユーザは[`purescript`層](https://github.com/syl20bnr/spacemacs/tre
 - [purs-loader](https://github.com/ethul/purs-loader/) - WebPack用のPureScriptローダ
 - [psc-pane](https://github.com/anttih/psc-pane) - ウインドウに合うように1つのエラーを整形する自動リロードコンパイラ
 - [purescript-psa](https://github.com/natefaubion/purescript-psa) - 色付き、元のエラー範囲、警告のフィルタリング、永続性を特徴とする、`psc`のための可愛く柔軟な、エラー／警告を報告するフロントエンド
-- [pscid](https://github.com/kRITZCREEK/pscid) is a lightweight file-watcher/testrunner for PS projects, that uses `psc-ide` to provide fast rebuilds.
 - [pscid](https://github.com/kRITZCREEK/pscid) `psc-ide`を使用して高速再ビルドを行う、PureScriptプロジェクト用の軽量ファイルウォッチャー／テストランナー
