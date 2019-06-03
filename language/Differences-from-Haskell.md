@@ -474,9 +474,15 @@ In Haskell, there is syntactic sugar to partially apply infix operators.
 -->
 Haskellでは、中置演算子の部分適用のために糖衣構文があります。
 
+<!--
 ```haskell
 (2 ^) -- desugars to `(^) 2`, or `\x -> 2 ^ x`
 (^ 2) -- desugars to `flip (^) 2`, or `\x -> x ^ 2`
+```
+-->
+```haskell
+(2 ^) -- これは`(^) 2`または`\x -> 2 ^ x`に脱糖されます
+(^ 2) -- これは`flip (^) 2`または`\x -> x ^ 2`脱糖されます
 ```
 
 <!--
