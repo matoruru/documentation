@@ -124,8 +124,8 @@ This repository is a collaborative effort, so please feel free to make a pull re
 -->
 ### トーク・会合
 
-- [PureScript Presentations](ecosystem/PureScript-Presentations.md)
-- [PureScript Meetups](ecosystem/PureScript-Meetups.md)
+- [PureScriptプレゼン](ecosystem/PureScript-Presentations.md)
+- [PureScript会合](ecosystem/PureScript-Meetups.md)
 
 <!--
 ### Related Languages
