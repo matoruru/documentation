@@ -7,7 +7,7 @@
 * [PureScript Unscripted](#purescript-unscripted)
 * [Web Conference Room Links](#web-conference-room-links)
 -->
-* [PureScript Unscripted](#PureScript Unscripted)
+* [PureScript Unscripted](#purescript-unscripted)
 * [Web会議室のリンク](#Web会議室)
 
 <!--
