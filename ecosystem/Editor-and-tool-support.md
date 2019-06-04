@@ -95,7 +95,7 @@ Spacemacsユーザは[`purescript`層](https://github.com/syl20bnr/spacemacs/tre
 - [pscid](https://github.com/kRITZCREEK/pscid) is a lightweight file-watcher/testrunner for PS projects, that uses `psc-ide` to provide fast rebuilds.
 -->
 - [Pulp](https://github.com/purescript-contrib/pulp) - PureScript (`npm`の[pulp](https://www.npmjs.com/package/pulp))用のスタンドアロン型ビルドシステム
-- [psc-package](https://github.com/purescript/psc-package): - パッケージ集合の概念を基にしたPureScriptパッケージマネージャ
+- [psc-package](https://github.com/purescript/psc-package): - package setsの概念を基にしたPureScriptパッケージマネージャ
 - [Gulp task](https://github.com/purescript-contrib/gulp-purescript) (`npm`の`gulp-purescript`)
 - [psvm-js](https://github.com/ThomasCrvsr/psvm-js) - PureScriptバージョンマネージャ
 - [purs-loader](https://github.com/ethul/purs-loader/) - WebPack用のPureScriptローダ
