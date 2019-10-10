@@ -369,8 +369,10 @@ Record literals with wildcards can be used to create a function that produces th
 { foo: _, bar: _ }
 ```
 
-これは以下と同等です：
+<!--
 is equivalent to:
+-->
+これは以下と同等です：
 
 ``` purescript
 \foo bar -> { foo: foo, bar: bar }
