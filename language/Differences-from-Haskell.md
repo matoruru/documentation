@@ -565,7 +565,7 @@ Although note that these might have different behaviour to the Haskell versions 
 <!--
 When writing documentation, the pipe character `|` must appear at the start of every comment line, not just the first. See [the documentation for doc-comments](Syntax.md#comments) for more details.
 -->
-ドキュメントを書いている時には、全コメント行の先頭にパイプ文字`|`を書く必要があります。詳しくは[文書化コメントのための文書](Syntax.md#comments)を参照してください。
+ドキュメントを書いている時には、全コメント行の先頭にパイプ文字`|`を書く必要があります。詳しくは[文書化コメントのための文書](Syntax.md#コメント)を参照してください。
 
 <!--
 ## Where is ... from Haskell?
